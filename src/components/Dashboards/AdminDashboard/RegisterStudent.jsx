@@ -27,7 +27,7 @@
 //         password: password
 //       };
 //       console.log(student);
-//       const res = await fetch("http://localhost:3000/api/student/register-student", {
+//       const res = await fetch("https://hostellerhomesbackend.onrender.com/api/student/register-student", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -333,7 +333,7 @@ function RegisterStudent() {
         father_name: fatherName, contact, address, dob, uidai, hostel, password
       };
 
-      const res = await fetch("http://localhost:3000/api/student/register-student", {
+      const res = await fetch("https://hostellerhomesbackend.onrender.com/api/student/register-student", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(student),

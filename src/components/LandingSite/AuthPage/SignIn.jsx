@@ -19,7 +19,7 @@ export default function SignIn() {
       password: pass,
     };
 
-    let response = await fetch("http://localhost:3000/api/auth/login", {
+    let response = await fetch("https://hostellerhomesbackend.onrender.com/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export default function SignIn() {
 
     if (result.success) {
       localStorage.setItem("token", result.data.token);
-      let student = await fetch("http://localhost:3000/api/student/get-student", {
+      let student = await fetch("https://hostellerhomesbackend.onrender.com/api/student/get-student", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

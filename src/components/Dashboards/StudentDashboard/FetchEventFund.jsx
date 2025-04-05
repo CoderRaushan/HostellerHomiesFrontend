@@ -8,7 +8,7 @@ const About = () => {
       useEffect(() => {
           const fetchData = async () => {
               try {
-                  const res = await fetch('http://localhost:3000/api/Event/EventFund/student/get');
+                  const res = await fetch('https://hostellerhomesbackend.onrender.com/api/Event/EventFund/student/get');
                   const data = await res.json();
                   console.log(data);
               } catch (error) {

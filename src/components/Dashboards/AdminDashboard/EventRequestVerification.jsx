@@ -11,7 +11,7 @@
 //   useEffect(() => {
 //     const fetchEventData = async () => {
 //       try {
-//         const response = await axios.get("http://localhost:3000/api/Event/EventFund/get");
+//         const response = await axios.get("https://hostellerhomesbackend.onrender.com/api/Event/EventFund/get");
 //         setEvents(response.data.eventFundData);
 //       } catch (err) {
 //         setError(err.message);
@@ -37,7 +37,7 @@
 //       return;
 //     }
 //     try {
-//       await axios.put("http://localhost:3000/api/Event/EventFund/admin/update", {
+//       await axios.put("https://hostellerhomesbackend.onrender.com/api/Event/EventFund/admin/update", {
 //         eventFundId: eventId,
 //         status: selectedStatus,
 //       });
@@ -155,7 +155,7 @@ const EventRequestVerification = () => {
   useEffect(() => {
     const fetchEventData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/Event/EventFund/get");
+        const response = await axios.get("https://hostellerhomesbackend.onrender.com/api/Event/EventFund/get");
         setEvents(response.data.eventFundData);
       } catch (err) {
         setError(err.message);
@@ -181,7 +181,7 @@ const EventRequestVerification = () => {
       return;
     }
     try {
-      await axios.put("http://localhost:3000/api/Event/EventFund/admin/update", {
+      await axios.put("https://hostellerhomesbackend.onrender.com/api/Event/EventFund/admin/update", {
         eventFundId: eventId,
         status: selectedStatus,
       });

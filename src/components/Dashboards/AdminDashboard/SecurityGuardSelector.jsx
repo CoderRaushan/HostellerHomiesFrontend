@@ -10,7 +10,7 @@
 //   useEffect(() => {
 //     const fetchGuards = async () => {
 //       try {
-//         const response = await axios.get('http://localhost:3000/api/guard/guards');
+//         const response = await axios.get('https://hostellerhomesbackend.onrender.com/api/guard/guards');
 //         setGuards(response.data);
 //         const currentOnDuty = response.data.find((g) => g.onDuty);
 //         if (currentOnDuty) {
@@ -30,7 +30,7 @@
 //     const guardId = e.target.value;
 //     setSelectedGuardId(guardId);
 //     try {
-//       const response = await axios.put('http://localhost:3000/api/guard/guards/on-duty', { guardId });
+//       const response = await axios.put('https://hostellerhomesbackend.onrender.com/api/guard/guards/on-duty', { guardId });
 //       setOnDutyGuard(response.data);
 //     } catch (error) {
 //       console.error('Error setting guard on duty:', error);
@@ -88,7 +88,7 @@ const SecurityGuardSelector = () => {
 
   const fetchGuards = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/guard/guards');
+      const response = await axios.get('https://hostellerhomesbackend.onrender.com/api/guard/guards');
       const guardList = response.data;
       setGuards(guardList);
 
@@ -112,7 +112,7 @@ const SecurityGuardSelector = () => {
 
     try {
       // Set new guard on duty
-      await axios.put('http://localhost:3000/api/guard/guards/on-duty', { guardId });
+      await axios.put('https://hostellerhomesbackend.onrender.com/api/guard/guards/on-duty', { guardId });
 
       // Refresh the guards list and update the on-duty guard
       await fetchGuards();

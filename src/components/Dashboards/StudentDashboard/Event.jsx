@@ -20,7 +20,7 @@ const Event = () => {
   const [eventList, setEventList] = useState([]);
   const fetchEvents = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/api/Event/EventFund/student/get', {
+      const res = await axios.post('https://hostellerhomesbackend.onrender.com/api/Event/EventFund/student/get', {
         studentId
       });
       if (res.data.success) {
@@ -47,7 +47,7 @@ const Event = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/Event/EventFund", formData);
+      const response = await axios.post("https://hostellerhomesbackend.onrender.com/api/Event/EventFund", formData);
       if (response.data.success) {
         setFormData({
           student: studentId,

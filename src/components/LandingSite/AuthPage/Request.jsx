@@ -9,7 +9,7 @@ export default function RequestAcc() {
       urn: inputurn,
     };
 
-    fetch("http://localhost:3000/api/request/register", {
+    fetch("https://hostellerhomesbackend.onrender.com/api/request/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

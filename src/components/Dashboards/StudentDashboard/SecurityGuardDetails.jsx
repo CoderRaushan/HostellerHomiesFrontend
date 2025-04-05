@@ -10,7 +10,7 @@
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {
-//         const response = await axios.get("http://localhost:3000/api/guard/guards");
+//         const response = await axios.get("https://hostellerhomesbackend.onrender.com/api/guard/guards");
 //         console.log("API Response:", response.data);
 
 //         // Assuming response.data is an object with `guards` and `emergencyContacts`
@@ -93,7 +93,7 @@ function SecurityGuardDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/guard/guards");
+        const response = await axios.get("https://hostellerhomesbackend.onrender.com/api/guard/guards");
         console.log("API Response:", response.data);
         setGuardDetails(response.data || []);
       } catch (err) {
