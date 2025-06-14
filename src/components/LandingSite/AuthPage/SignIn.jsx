@@ -191,7 +191,7 @@ export default function SignIn() {
               <button
                 type="submit"
                 disabled={formState.isLoading}
-                className="w-full flex justify-center items-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 px-4 rounded-xl font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-70"
+                className="w-full flex justify-center items-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 px-4 rounded-xl font-medium shadow-md hover:scale-95  transform hover:-translate-y-0.5 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-70"
               >
                 {formState.isLoading ? (
                   <>

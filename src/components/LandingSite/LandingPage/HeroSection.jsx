@@ -34,7 +34,11 @@ function HeroSection() {
         >
           {slides.map((url, index) => (
             <SwiperSlide key={index}>
-              <img src={url} alt={`Slide ${index + 1}`} className="w-full h-full object-cover" />
+              <img
+                src={url}
+                alt={`Slide ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -46,10 +50,11 @@ function HeroSection() {
           <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl">
             Hosteller<span className="text-[#4f46e5]">Homies</span>
           </h1>
+
           <p className="py-10 text-lg sm:text-xl md:text-2xl">
             One Solution For All Of The Hostel&apos;s Needs
           </p>
-          <div className="py-10">
+          <div className="">
             <Link
               to="/auth/login"
               className="bg-[#4f46e5] text-white py-3 px-12 sm:px-16 md:px-20 hover:bg-blue-700 transition rounded text-lg sm:text-xl md:text-2xl"
@@ -63,6 +68,13 @@ function HeroSection() {
             >
               Request Registration
             </Link>
+          </div>
+          <div className="text-lg sm:text-xl md:text-2xl flex flex-col items-start mx-auto w-fit">
+            <span>Admin Email:raushankumar23082004@gmail.com</span>
+            <span>password:123456789</span>
+            <hr />
+             <span>User Email:utkarsh@gmail.com</span>
+            <span>password:123456789</span>
           </div>
         </div>
       </div>

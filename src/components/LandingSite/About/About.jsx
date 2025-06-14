@@ -1,5 +1,3 @@
-
-
 import { TeamCard } from "./TeamMember";
 import Raushan from "/src/assets/RaushanImage.jpg";
 import Utkarsh from "/src/assets/utkarsh.png";
@@ -7,26 +5,26 @@ import Ankush from "/src/assets/ankush.jpg";
 function About() {
   const utkarsh = {
     name: "Utkarsh",
-    designation: "Team Leader",
+    designation: "Full Stack Developer",
     image: Utkarsh,
     linkedin: "https://www.linkedin.com/in/utkarsh-kumar-a3806b2b8/",
   };
   const raushan = {
     name: "Raushan",
-    designation: "Backend Developer",
+    designation: "Full Stack Developer",
     image: Raushan,
     linkedin: "https://www.linkedin.com/in/raushan-kumar-964a75255/",
   };
   const jay = {
     name: "Jay",
-    designation: "Frontend Developer",
+    designation: "Full Stack Developer",
     image:
       "https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png",
     linkedin: "https://www.linkedin.com/in/jay-kumar-b9b29125b/",
   };
   const ankush = {
     name: "Ankush",
-    designation: "Database Manager",
+    designation: "Full Stack Developer",
     image: Ankush,
     linkedin: "https://www.linkedin.com/in/ankushsingh374/",
   };
