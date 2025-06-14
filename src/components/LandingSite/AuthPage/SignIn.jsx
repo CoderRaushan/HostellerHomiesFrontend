@@ -4,7 +4,7 @@ import { verifysession } from "../../../utils/";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { motion } from "framer-motion"; // You'll need to install this package
-
+import "./SignIn.css"; // Import your custom styles`
 export default function SignIn() {
   const mainUri = import.meta.env.VITE_MAIN_URI;
   const navigate = useNavigate();

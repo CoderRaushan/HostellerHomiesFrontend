@@ -31,10 +31,15 @@ function About() {
 
   return (
     <div style={{ backgroundColor: "#f3e8ff" }} className="min-h-screen ">
-      <h1 className="font-bold text-black text-center text-5xl py-20 mt-3">
-        Meet Our Team!
-      </h1>
-      <div className="py-2 sm:py-2 flex gap-10 flex-wrap justify-center items-center">
+     <h1 
+  className="font-bold text-center text-2xl sm:text-4xl lg:text-5xl pt-11  mt-16
+    text-black hover:scale-105 transition-transform duration-300
+    tracking-tight leading-tight
+    mb-4 relative z-10"
+>
+   Meet Our Team!
+</h1>
+      <div className="py-2 sm:py-2 flex gap-10 flex-wrap justify-center items-center mt-0 ">
         <TeamCard member={utkarsh} />
         <TeamCard member={raushan} />
         <TeamCard member={jay} />
