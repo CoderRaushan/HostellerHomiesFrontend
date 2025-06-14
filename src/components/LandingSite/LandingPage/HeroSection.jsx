@@ -69,15 +69,9 @@ function HeroSection() {
               Request Registration
             </Link>
           </div> */}
-          {/* <div className="text-lg sm:text-xl md:text-2xl flex flex-col items-start mx-auto w-fit py-3">
-            <span>AdminEmail:raushankumar23082004@gmail.com</span>
-            <span>AminPassword:123456789</span>
-            <hr />
-            <span>UserEmail:utkarsh@gmail.com</span>
-            <span>UserPassword:123456789</span>
-          </div> */}
+         
           <div className="text-lg sm:text-xl md:text-2xl flex flex-col items-start mx-auto w-fit py-3 max-w-[90vw] break-words">
-            <span>AdminEmail: raushankumar23082004@gmail.com</span>
+            <span>AdminEmail: raushan@gmail.com</span>
             <span>AdminPassword: 123456789</span>
             <hr className="w-full my-2" />
             <span>UserEmail: utkarsh@gmail.com</span>
