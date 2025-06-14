@@ -107,7 +107,7 @@ function RegisterStudent() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <div className="w-full min-h-screen bg-white text-black pt-20 flex flex-col items-center justify-center">
+    <div className="w-full min-h-screen bg-white text-black pt-36 flex flex-col items-center justify-center">
       <h1 className="font-extrabold text-4xl md:text-5xl text-center text-[#4f46e5] mb-8">Register Student</h1>
       <div className="max-w-4xl w-full p-10 bg-white rounded-2xl shadow-xl drop-shadow-2xl shadow-black/10 mb-12"> 
         <form method="post" onSubmit={registerStudent} className="flex flex-col gap-5">

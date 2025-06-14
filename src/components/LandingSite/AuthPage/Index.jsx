@@ -7,7 +7,7 @@ export default function AuthPage() {
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-[73vh] lg:py-0">
           <a
             href="/"
-            className="flex items-center mb-6 text-2xl font-semibold text-white"
+            // className="flex items-center mb-6 text-2xl font-semibold text-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
