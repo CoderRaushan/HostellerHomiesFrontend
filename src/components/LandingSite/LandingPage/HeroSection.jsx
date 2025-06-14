@@ -51,10 +51,10 @@ function HeroSection() {
             Hosteller<span className="text-[#4f46e5]">Homies</span>
           </h1>
 
-          <p className="py-10 text-lg sm:text-xl md:text-2xl">
+          <p className="py-2 text-lg sm:text-xl md:text-2xl">
             One Solution For All Of The Hostel&apos;s Needs
           </p>
-          <div className="">
+          {/* <div className="">
             <Link
               to="/auth/login"
               className="bg-[#4f46e5] text-white py-3 px-12 sm:px-16 md:px-20 hover:bg-blue-700 transition rounded text-lg sm:text-xl md:text-2xl"
@@ -68,13 +68,20 @@ function HeroSection() {
             >
               Request Registration
             </Link>
-          </div>
-          <div className="text-lg sm:text-xl md:text-2xl flex flex-col items-start mx-auto w-fit">
-            <span>Admin Email:raushankumar23082004@gmail.com</span>
-            <span>password:123456789</span>
+          </div> */}
+          {/* <div className="text-lg sm:text-xl md:text-2xl flex flex-col items-start mx-auto w-fit py-3">
+            <span>AdminEmail:raushankumar23082004@gmail.com</span>
+            <span>AminPassword:123456789</span>
             <hr />
-             <span>User Email:utkarsh@gmail.com</span>
-            <span>password:123456789</span>
+            <span>UserEmail:utkarsh@gmail.com</span>
+            <span>UserPassword:123456789</span>
+          </div> */}
+          <div className="text-lg sm:text-xl md:text-2xl flex flex-col items-start mx-auto w-fit py-3 max-w-[90vw] break-words">
+            <span>AdminEmail: raushankumar23082004@gmail.com</span>
+            <span>AdminPassword: 123456789</span>
+            <hr className="w-full my-2" />
+            <span>UserEmail: utkarsh@gmail.com</span>
+            <span>UserPassword: 123456789</span>
           </div>
         </div>
       </div>
