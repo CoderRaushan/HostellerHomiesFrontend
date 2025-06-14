@@ -6,6 +6,7 @@ import LoadingBar from "react-top-loading-bar";
 
 function MessOff() {
   const mainUri = import.meta.env.VITE_MAIN_URI;
+
   const getRequests = async () => {
     setProgress(30);
     const hostels = JSON.parse(localStorage.getItem("admin"));
@@ -28,13 +29,13 @@ function MessOff() {
         req.student.name = req.student.name;
         req.student.room_no = req.student.room_no;
         req.status = req.status;
-        setProgress(progress + 10);
+        setProgress((prev) => prev + 10);
       });
       setProgress(80);
       setNewReqs(data.list);
       setApprovedReqs(data.approved);
       setRejectedReqs(data.rejected);
-      graphData.current = [approvedReqs, rejectedReqs, newReqs.length];
+      graphData.current = [data.approved, data.rejected, data.list.length];
     }
     setProgress(100);
   };
@@ -49,7 +50,7 @@ function MessOff() {
     });
     const data = await res.json();
     if (data.success) {
-      let student = newReqs.find((req) => req.id === id).student;
+      const student = newReqs.find((req) => req.id === id).student;
       toast.success(`Request from ${student.name} has been ${status}`, {
         position: "top-right",
         autoClose: 3000,
@@ -75,12 +76,12 @@ function MessOff() {
   const graphData = useRef([approvedReqs, rejectedReqs, newReqs.length]);
 
   const approve = (id) => {
-    setNewReqs((newReqs) => newReqs.filter((req) => req.id !== id));
+    setNewReqs((prev) => prev.filter((req) => req.id !== id));
     updateRequest(id, "approved");
   };
 
   const reject = (id) => {
-    setNewReqs((newReqs) => newReqs.filter((req) => req.id !== id));
+    setNewReqs((prev) => prev.filter((req) => req.id !== id));
     updateRequest(id, "rejected");
   };
 
@@ -94,9 +95,9 @@ function MessOff() {
               label: "Requests",
               data: graphData.current,
               backgroundColor: [
-                "rgba(79, 70, 229, 0.8)", // Indigo for accepted
-                "rgba(220, 38, 38, 0.8)", // Red for rejected
-                "rgba(245, 158, 11, 0.8)", // Amber for pending
+                "rgba(79, 70, 229, 0.8)",
+                "rgba(220, 38, 38, 0.8)",
+                "rgba(245, 158, 11, 0.8)",
               ],
               borderColor: ["#4f46e5", "#dc2626", "#f59e0b"],
               borderWidth: 1,
@@ -154,22 +155,25 @@ function MessOff() {
 
   useEffect(() => {
     getRequests();
-  }, [newReqs.length, approvedReqs, rejectedReqs]);
+  }, []);
 
   return (
-    <div className="w-full min-h-screen flex flex-col gap-6 items-center justify-center pt-16 pb-10 bg-[#f3e8ff]">
+    // <div className="w-full min-h-screen flex flex-col gap-6 items-center justify-start pt-24 pb-10 px-4 bg-[#f3e8ff]">
+    <div className="w-full min-h-screen flex flex-col gap-6 items-center justify-start pt-24 pb-10 px-4 bg-[#f3e8ff] lg:pl-64">
+
       <LoadingBar
         color="#4f46e5"
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
-      <h1 className="text-black font-bold text-4xl md:text-5xl mb-2">
+
+      <h1 className="text-black font-bold text-3xl sm:text-4xl md:text-5xl mb-2 text-center">
         Mess-Off Management
       </h1>
 
-      <div className="w-full max-w-xl px-4">{graph}</div>
+      <div className="w-full max-w-4xl">{graph}</div>
 
-      <div className="bg-white px-6 py-5 rounded-xl shadow-lg w-full max-w-xl mx-4 max-h-96 overflow-auto">
+      <div className="bg-white px-4 sm:px-6 py-5 rounded-xl shadow-lg w-full max-w-xl max-h-[26rem] sm:max-h-96 overflow-auto">
         <div className="flex items-center justify-between mb-4">
           <span className="text-black font-bold text-xl">Pending Requests</span>
           <span className="bg-[#4f46e5] text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -209,15 +213,12 @@ function MessOff() {
                     <p className="text-sm font-medium text-black">
                       {req.student.name}
                     </p>
-                    <div className="flex items-center mt-1">
-                      <span className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">
+                    <div className="flex items-center mt-1 flex-wrap gap-2 text-xs text-gray-500">
+                      <span className="bg-gray-100 px-2 py-1 rounded text-gray-700">
                         Room: {req.student.room_no}
                       </span>
-                      <span className="mx-2 text-gray-300">•</span>
-                      <span className="text-xs text-gray-500">
-                        <span className="font-medium">From:</span> {req.from}{" "}
-                        <span className="font-medium">To:</span> {req.to}
-                      </span>
+                      <span className="font-medium">From:</span> {req.from}
+                      <span className="font-medium">To:</span> {req.to}
                     </div>
                   </div>
                   <div className="flex gap-2">
@@ -275,33 +276,22 @@ function MessOff() {
         </ul>
       </div>
 
-      <div className="w-full max-w-xl mx-4 mt-2 flex justify-between">
-        <div className="bg-white px-4 py-3 rounded-xl shadow-md w-48 text-center">
+      <div className="w-full max-w-xl mx-4 mt-2 flex flex-col sm:flex-row gap-4 sm:justify-between">
+        <div className="flex-1 bg-white px-4 py-3 rounded-xl shadow-md text-center">
           <p className="text-sm text-gray-500">Approved</p>
           <p className="text-2xl font-bold text-[#4f46e5]">{approvedReqs}</p>
         </div>
-        <div className="bg-white px-4 py-3 rounded-xl shadow-md w-48 text-center">
+        <div className="flex-1 bg-white px-4 py-3 rounded-xl shadow-md text-center">
           <p className="text-sm text-gray-500">Rejected</p>
           <p className="text-2xl font-bold text-red-600">{rejectedReqs}</p>
         </div>
-        <div className="bg-white px-4 py-3 rounded-xl shadow-md w-48 text-center">
+        <div className="flex-1 bg-white px-4 py-3 rounded-xl shadow-md text-center">
           <p className="text-sm text-gray-500">Pending</p>
           <p className="text-2xl font-bold text-amber-500">{newReqs.length}</p>
         </div>
       </div>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick={true}
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable={true}
-        pauseOnHover={false}
-        theme="light"
-      />
+      <ToastContainer />
     </div>
   );
 }

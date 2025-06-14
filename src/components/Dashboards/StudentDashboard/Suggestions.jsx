@@ -5,50 +5,47 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Suggestions() {
   const mainUri = import.meta.env.VITE_MAIN_URI;
-  const registerSuggestions = async (e) => {
-    e.preventDefault();
-    const student = JSON.parse(localStorage.getItem("student"));
-    const response = await fetch(`${mainUri}/api/suggestion/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({student: student._id, hostel: student.hostel, title, description: desc}),
-    });
-
-    const data = await response.json();
-    if (data.success) {
-      toast.success("Suggestion registered successfully", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        draggable: true,
-      });
-    } else {
-      toast.error("Suggestion registration failed", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        draggable: true,
-      });
-    }
-  };
-
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
-  function titleChange(e) {
-    setTitle(e.target.value);
-  }
-  function descChange(e) {
-    setDesc(e.target.value);
-  }
+  const titleChange = (e) => setTitle(e.target.value);
+  const descChange = (e) => setDesc(e.target.value);
+
+  const registerSuggestions = async (e) => {
+    e.preventDefault();
+    const student = JSON.parse(localStorage.getItem("student"));
+    
+    try {
+      const response = await fetch(`${mainUri}/api/suggestion/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          student: student._id,
+          hostel: student.hostel,
+          title,
+          description: desc
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        toast.success("Suggestion registered successfully");
+        setTitle("");
+        setDesc("");
+      } else {
+        toast.error("Suggestion registration failed");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
 
   const suggestionTitle = {
     name: "suggestion title",
-    placeholder: "Title",
+    placeholder: "Enter suggestion title",
     req: true,
     type: "text",
     value: title,
@@ -56,36 +53,59 @@ function Suggestions() {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col gap-10 items-center justify-center max-h-screen overflow-y-auto ml-32 bg-[#f3e8ff]">
-      <h1 className="text-[#4f46e] font-bold text-5xl mt-5">Suggestions</h1>
-      <form
-        method="POST"
-        onSubmit={registerSuggestions}
-        className="md:w-[30vw] w-full py-5 pb-7 px-10 bg-white rounded-lg shadow-xl flex flex-col gap-5"
-      >
-        <Input field={suggestionTitle} />
-        <div>
-          <label
-            htmlFor="suggestion"
-            className="block mb-2 text-sm font-medium text-[#4f46e]"
+    <div className="w-full min-h-screen bg-[#f3e8ff] px-4 sm:px-6 md:px-8 py-6">
+      <div className="max-w-4xl mx-auto pt-16 sm:pt-20 md:pt-24">
+        <h1 className="text-[#4f46e5] font-bold text-3xl sm:text-4xl md:text-5xl text-center mb-8 sm:mb-10">
+          Share Your Suggestions
+        </h1>
+
+        <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8 max-w-2xl mx-auto">
+          <form 
+            onSubmit={registerSuggestions}
+            className="space-y-6"
           >
-            Your suggestion description
-          </label>
-          <textarea
-            name="suggestion"
-            placeholder="Suggestions..."
-            className="border sm:text-sm rounded-lg block w-full p-3 bg-white-800 border-[#4f46e] placeholder-gray-400 text-black focus:ring-[#4f46e] focus:border-[#4f46e] outline-none"
-            onChange={descChange}
-            value={desc}
-          ></textarea>
-          <button
-            type="submit"
-            className="w-full text-white bg-[#4f46e5] hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-[#4f46e] text-lg rounded-lg px-5 py-2.5 mt-5 text-center"
-          >
-            Make Suggestion
-          </button>
+            <div className="space-y-2">
+              <Input field={suggestionTitle} />
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="suggestion"
+                className="block text-sm font-medium text-[#4f46e5]"
+              >
+                Suggestion Details
+              </label>
+              <textarea
+                id="suggestion"
+                name="suggestion"
+                placeholder="Describe your suggestion in detail..."
+                rows="5"
+                className="w-full p-3 border-2 border-[#4f46e5]/20 rounded-lg
+                         text-gray-900 placeholder:text-gray-400
+                         focus:ring-2 focus:ring-[#4f46e5]/50 focus:border-[#4f46e5]
+                         outline-none transition duration-200
+                         text-sm sm:text-base resize-y min-h-[120px]"
+                onChange={descChange}
+                value={desc}
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-[#4f46e5] text-white py-2.5 sm:py-3 px-5
+                       rounded-lg text-base sm:text-lg font-semibold
+                       hover:bg-[#4338ca] focus:ring-4 focus:ring-[#4f46e5]/50
+                       transition duration-200 ease-in-out
+                       disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!title.trim() || !desc.trim()}
+            >
+              Submit Suggestion
+            </button>
+          </form>
         </div>
-      </form>
+      </div>
+
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -96,7 +116,8 @@ function Suggestions() {
         pauseOnFocusLoss={true}
         draggable={true}
         pauseOnHover={true}
-        theme="dark"
+        theme="light"
+        className="mt-16"
       />
     </div>
   );

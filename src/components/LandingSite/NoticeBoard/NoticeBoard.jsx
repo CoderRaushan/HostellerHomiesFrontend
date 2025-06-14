@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   Box,
@@ -54,18 +55,20 @@ const NoticeBoard = () => {
         minHeight: "100vh",
         background: "linear-gradient(135deg, #EEE6FF 0%, #F5F0FF 100%)",
         padding: { xs: 2, sm: 4, md: 6, lg: 8 },
-        pt: { xs: 12, sm: 14, lg: 20 }, // Adjusted padding for larger screens
+        pt: { xs: 10, sm: 12, md: 14 },
       }}
     >
-      {/* Header */}
+      {/* Header with title and FAB aligned */}
       <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
+          marginTop: { xs: 4, sm: 6, lg: 6 },
           alignItems: "center",
           mb: { xs: 4, sm: 6, lg: 8 },
           mx: "auto",
-          maxWidth: "1200px",
+          maxWidth: "1000px",
+          px: 2,
         }}
       >
         <Typography
@@ -78,7 +81,6 @@ const NoticeBoard = () => {
             fontWeight: 800,
             fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem", lg: "3.5rem" },
             textShadow: "0px 2px 4px rgba(0,0,0,0.1)",
-            textAlign: "center", // Centered header
           }}
         >
           Notice Board
@@ -91,20 +93,21 @@ const NoticeBoard = () => {
             bgcolor: "#4f46e5",
             "&:hover": { bgcolor: "#4338ca" },
             boxShadow: "0 4px 14px rgba(79, 70, 229, 0.4)",
+            zIndex: 1,
           }}
         >
           <AddIcon />
         </Fab>
       </Box>
 
-      {/* Notices Container */}
+      {/* Notices List */}
       <Box
         sx={{
-          maxWidth: { xs: "100%", sm: "90%", md: "80%", lg: "70%" }, // Responsive width
+          maxWidth: { xs: "100%", sm: "90%", md: "80%", lg: "70%" },
           mx: "auto",
           display: "flex",
           flexDirection: "column",
-          gap: { xs: 3, sm: 4, lg: 5 }, // Adjusted gap for larger screens
+          gap: { xs: 3, sm: 4, lg: 5 },
         }}
       >
         {notices.map((notice) => (
@@ -182,13 +185,16 @@ const NoticeBoard = () => {
         >
           Add New Notice
         </DialogTitle>
-        <DialogContent sx={{ p: 3, pt: 4 }}>
+        <DialogContent className="mt-6" sx={{ p: 3, pt: 4 }}>
           <TextField
+            
             autoFocus
             label="Notice Title"
             fullWidth
             value={newNotice.title}
-            onChange={(e) => setNewNotice({ ...newNotice, title: e.target.value })}
+            onChange={(e) =>
+              setNewNotice({ ...newNotice, title: e.target.value })
+            }
             sx={{ mb: 3 }}
           />
           <TextField
@@ -197,7 +203,9 @@ const NoticeBoard = () => {
             multiline
             rows={4}
             value={newNotice.content}
-            onChange={(e) => setNewNotice({ ...newNotice, content: e.target.value })}
+            onChange={(e) =>
+              setNewNotice({ ...newNotice, content: e.target.value })
+            }
           />
         </DialogContent>
         <DialogActions sx={{ p: 3, gap: 1 }}>

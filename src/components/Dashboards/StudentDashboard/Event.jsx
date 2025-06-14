@@ -82,9 +82,12 @@ const Event = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-[#f3e8ff] p-24 w-500">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-[#f3e8ff] pt-24 px-4 sm:px-6">
+
+
       <ToastContainer />
-      <div className="w-full max-w-4xl p-6 rounded-lg border border-gray-300 bg-white mb-10 shadow-lg">
+      <div className="w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-4xl p-4 sm:p-6 rounded-lg border border-gray-300 bg-white mb-10 shadow-lg">
+
         <h2 className="text-3xl font-bold text-[#4f46e5] text-center mb-4">Event Fund Request</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

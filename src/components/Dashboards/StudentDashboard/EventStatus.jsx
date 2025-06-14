@@ -54,8 +54,10 @@ const EventStatus = ({ currentStatus }) => {
   };
 
   return (
-    <div className="p-6 shadow-lg rounded-xl bg-white text-black border mb-4 max-w-3xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-4 text-[#4f46e5]">Event Fund Request</h2>
+ <div className="p-4 sm:p-6 shadow-lg rounded-xl bg-white text-black border mb-4 w-full max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto">
+
+     <h2 className="text-3xl font-bold text-[#4f46e5] text-center mt-4 mb-4">Event Fund Request</h2>
+
 
       {/* Event Details */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-sm">
