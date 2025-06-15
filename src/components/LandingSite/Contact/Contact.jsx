@@ -1,102 +1,3 @@
-// import React, { useState } from 'react';
-// import emailjs from '@emailjs/browser';
-
-// function Contact() {
-//   const [email, setEmail] = useState('');
-//   const [subject, setSubject] = useState('');
-//   const [message, setMessage] = useState('');
-//   const [isSending, setIsSending] = useState(false);
-//   const [isSent, setIsSent] = useState(false);
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     setIsSending(true);
-
-//     emailjs.send('service_0efzx8m', 'template_3ref3vd', {
-//       email,
-//       subject,
-//       message,
-//     }, 'Tew9A-B-c5W2S7CYH')
-//       .then(() => {
-//         setIsSending(false);
-//         setIsSent(true);
-//       })
-//       .catch((error) => {
-//         console.error('Error sending email:', error);
-//         setIsSending(false);
-//       });
-//   };
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     if (name === 'email') {
-//       setEmail(value);
-//     } else if (name === 'subject') {
-//       setSubject(value);
-//     } else if (name === 'message') {
-//       setMessage(value);
-//     }
-//   };
-
-//   return (
-//     <section className="bg-white dark:bg-gray-900">
-//       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-//         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
-//         <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">If you are facing any problem or if you have any querie, Let us know.</p>
-//         <form onSubmit={handleSubmit} className="space-y-8">
-//           <div>
-//             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
-//             <input
-//               type="email"
-//               id="email"
-//               name="email"
-//               value={email}
-//               onChange={handleInputChange}
-//               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-//               placeholder="name@flowbite.com"
-//               required
-//             />
-//           </div>
-//           <div>
-//             <label htmlFor="subject" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
-//             <input
-//               type="text"
-//               id="subject"
-//               name="subject"
-//               value={subject}
-//               onChange={handleInputChange}
-//               className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-//               placeholder="Let us know how we can help you"
-//               required
-//             />
-//           </div>
-//           <div className="sm:col-span-2">
-//             <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
-//             <textarea
-//               id="message"
-//               name="message"
-//               rows="6"
-//               value={message}
-//               onChange={handleInputChange}
-//               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-//               placeholder="Leave a comment..."
-//             ></textarea>
-//           </div>
-//           <button
-//             type="submit"
-//             className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-//             disabled={isSending || isSent}
-//           >
-//             {isSending ? 'Sending...' : isSent ? 'Sent!' : 'Send message'}
-//           </button>
-//         </form>
-//       </div>
-//     </section>
-//   );
-// }
-
-// export { Contact };
-
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 
@@ -250,44 +151,28 @@ function Contact() {
               <div className="mt-12">
                 <div className="flex space-x-4">
                   <a
-                    href="#"
+                    href="https://www.gndec.ac.in/"
                     className="bg-indigo-500 p-2 rounded-full hover:bg-indigo-400 transition-colors"
+                    target="_blank"
                   >
                     <svg
-                      className="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6"
                     >
-                      <path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h21.352c.731 0 1.324-.592 1.324-1.324V1.324C24 .593 23.407 0 22.676 0zm-6.583 9.75c.01.142.01.284.01.426 0 4.335-3.299 9.33-9.33 9.33A9.267 9.267 0 01.5 17.662c.262.03.522.043.786.043a6.568 6.568 0 004.077-1.403 3.29 3.29 0 01-3.067-2.28c.203.034.406.051.61.051.293 0 .577-.04.85-.115a3.285 3.285 0 01-2.633-3.223v-.04c.442.246.95.392 1.486.412a3.28 3.28 0 01-1.46-2.732c0-.6.162-1.164.444-1.65a9.307 9.307 0 006.761 3.43 3.69 3.69 0 01-.081-.752 3.282 3.282 0 013.284-3.283c.955 0 1.815.4 2.423 1.043a6.59 6.59 0 002.079-.792 3.3 3.3 0 01-1.442 1.815 6.553 6.553 0 001.881-.507 7.048 7.048 0 01-1.633 1.693z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"
+                      />
                     </svg>
                   </a>
-                  <a
-                    href="#"
-                    className="bg-indigo-500 p-2 rounded-full hover:bg-indigo-400 transition-colors"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z" />
-                    </svg>
-                  </a>
-                  <a
-                    href="#"
-                    className="bg-indigo-500 p-2 rounded-full hover:bg-indigo-400 transition-colors"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                    </svg>
-                  </a>
+                  <div>
+                    <h3 className="font-semibold">Visit Us</h3>
+                  </div>
                 </div>
               </div>
             </div>

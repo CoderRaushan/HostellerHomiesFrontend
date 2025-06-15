@@ -1,61 +1,12 @@
 import { useEffect, useState } from "react";
 import { Input } from "../../LandingSite/AuthPage/Input";
 import { Doughnut } from "react-chartjs-2";
-import "chart.js/auto"; // !IMPORTANT
+import "chart.js/auto";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Mess() {
   const mainUri = import.meta.env.VITE_MAIN_URI;
-  let requestMessOff = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    let data = {
-      student: JSON.parse(localStorage.getItem("student"))._id,
-      leaving_date: leaveDate,
-      return_date: returnDate,
-    };
-
-    let response = await fetch(`${mainUri}/api/Messoff/request`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    let result = await response.json();
-    if (result.success) {
-      setRequests(requests + 1);
-      setLeaveDate("");
-      setReturnDate("");
-      toast.success("Mess Off Requested Successfully!", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    } else {
-      toast.error(result.message, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
-
-    setLoading(false);
-  };
-
-  let daysofmonthtilltoday = new Date().getDate();
 
   const [leaveDate, setLeaveDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
@@ -64,12 +15,33 @@ function Mess() {
   const [loading, setLoading] = useState(false);
   const [requestsList, setRequestsList] = useState([]);
 
-  function handleleaveChange(e) {
-    setLeaveDate(e.target.value);
-  }
-  function handlereturnChange(e) {
-    setReturnDate(e.target.value);
-  }
+  const daysofmonthtilltoday = new Date().getDate();
+
+  useEffect(() => {
+    const student = JSON.parse(localStorage.getItem("student"));
+    if (student) {
+      setLoading(true);
+      fetch(`${mainUri}/api/Messoff/count`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ student: student._id }),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result.success) {
+            setMessOff(result.approved);
+            setRequests(result.list.length);
+            setRequestsList(result.list);
+          } else {
+            alert(result.errors[0].msg);
+          }
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [requests]);
+
+  const handleleaveChange = (e) => setLeaveDate(e.target.value);
+  const handlereturnChange = (e) => setReturnDate(e.target.value);
 
   const leavingDate = {
     name: "leaving date",
@@ -88,32 +60,34 @@ function Mess() {
     onChange: handlereturnChange,
   };
 
-  useEffect(() => {
-    let student = JSON.parse(localStorage.getItem("student"));
+  const requestMessOff = async (event) => {
+    event.preventDefault();
     setLoading(true);
-    if (student) {
-      fetch(`${mainUri}/api/Messoff/count`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          student: student._id,
-        }),
-      })
-        .then((res) => res.json())
-        .then((result) => {
-          if (result.success) {
-            setMessOff(result.approved);
-            setRequests(result.list.length);
-            setRequestsList(result.list);
-          } else {
-            alert(result.errors[0].msg);
-          }
-        });
+    const student = JSON.parse(localStorage.getItem("student"));
+    const data = {
+      student: student._id,
+      leaving_date: leaveDate,
+      return_date: returnDate,
+    };
+
+    const response = await fetch(`${mainUri}/api/Messoff/request`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    if (result.success) {
+      setRequests((prev) => prev + 1);
+      setLeaveDate("");
+      setReturnDate("");
+      toast.success("Mess Off Requested Successfully!", { theme: "dark" });
+    } else {
+      toast.error(result.message, { theme: "dark" });
     }
+
     setLoading(false);
-  }, [requests]);
+  };
 
   const labels = ["Mess Off", "Requested Mess Off", "Mess Attended"];
   const loader = (
@@ -136,128 +110,111 @@ function Mess() {
   );
 
   return (
-    <div className="w-full h-screen gap-10 flex flex-col items-center justify-center max-h-screen overflow-y-auto pt-40 sm:pt-96 md:pt-96 lg:pt-40 pl-44 bg-[#f3e8ff]">
-      <h1 className="text-[#4f46e] font-bold text-5xl">Mess Off</h1>
-      <ul className="flex gap-5 text-[#4f46e] text-xl px-5 sm:p-0 text-center">
-        <li>Total Mess: {daysofmonthtilltoday - Messoff} </li>
+    <div className="w-full min-h-screen bg-[#f3e8ff] flex flex-col items-center justify-start pt-24 px-4 sm:px-6 md:px-10 lg:px-20 overflow-y-auto">
+      
+      <h1 className="text-[#4f46e] font-bold text-3xl sm:text-4xl lg:text-5xl mb-4 text-center">Mess Off</h1>
+
+      <ul className="flex flex-col sm:flex-row gap-3 text-[#4f46e] text-base sm:text-lg md:text-xl text-center mb-6 w-full justify-center">
+        <li>Total Mess: {daysofmonthtilltoday - Messoff}</li>
         <li>Mess Off: {loading ? loader : Messoff}</li>
         <li>Requests Sent: {loading ? loader : requests}</li>
       </ul>
-      <div className="w-full gap-10 flex items-center justify-center flex-wrap">
-        <div className="h-[30vh] gap-2 flex items-center justify-center flex-wrap">
-          <Doughnut
-            datasetIdKey="id"
-            data={{
-              labels,
-              datasets: [
-                {
-                  label: "Mess",
-                  data: [Messoff, requests, daysofmonthtilltoday - Messoff],
-                  backgroundColor: ["#F26916", "#EAB308", "#1D4ED8"],
-                  barThickness: 20,
-                  borderRadius: 0,
-                  borderJoinStyle: "round",
-                  borderColor: "rgba(0,0,0,0)",
-                  hoverOffset: 10,
+
+      <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-8 flex-wrap mb-10">
+        <div className="flex flex-col items-center gap-4 w-full sm:w-[20rem]">
+          <div className="w-full h-[250px] sm:h-[280px] md:h-[300px]">
+            <Doughnut
+              datasetIdKey="id"
+              data={{
+                labels,
+                datasets: [
+                  {
+                    label: "Mess",
+                    data: [Messoff, requests, daysofmonthtilltoday - Messoff],
+                    backgroundColor: ["#F26916", "#EAB308", "#1D4ED8"],
+                    hoverOffset: 10,
+                  },
+                ],
+              }}
+              options={{
+                plugins: {
+                  legend: { display: false },
                 },
-              ],
-            }}
-            options={{
-              plugins: {
-                legend: {
-                  display: false,
-                },
-              },
-            }}
-          />
-          <ul className="text-[#4f46e]">
-            <li className="flex gap-2">
-              <span className="w-10 h-5 bg-orange-500 block"></span> Mess Off
+                maintainAspectRatio: false,
+              }}
+            />
+          </div>
+          <ul className="text-[#4f46e] text-sm sm:text-base">
+            <li className="flex items-center gap-2">
+              <span className="w-6 h-4 bg-orange-500 block rounded-sm"></span> Mess Off
             </li>
-            <li className="flex gap-2">
-              <span className="w-10 h-5 bg-yellow-500 block"></span> Requested
-              Mess
+            <li className="flex items-center gap-2">
+              <span className="w-6 h-4 bg-yellow-500 block rounded-sm"></span> Requested Mess
             </li>
-            <li className="flex gap-2">
-              <span className="w-10 h-5 bg-blue-500 block"></span> Mess Attended
+            <li className="flex items-center gap-2">
+              <span className="w-6 h-4 bg-blue-500 block rounded-sm"></span> Mess Attended
             </li>
           </ul>
         </div>
-        <div className="w-full sm:w-90 max-w-md max-h-[300px] p-4 border rounded-lg shadow sm:p-8 bg-white border-neutral-900 drop-shadow-xl overflow-y-auto">
-          <div className="flex items-center justify-between mb-4 ">
-            <h5 className="text-xl font-bold leading-none text-[#4f46e]">
-              All Requests
-            </h5>
+
+        <div className="w-full sm:w-[22rem] md:w-[26rem] max-h-[300px] p-4 border rounded-lg shadow bg-white border-neutral-900 overflow-y-auto">
+          <div className="flex items-center justify-between mb-4">
+            <h5 className="text-xl font-bold text-[#4f46e]">All Requests</h5>
           </div>
           <div className="flow-root">
-            <ul role="list" className="divide-y divide-gray-700 text-[#4f46e]">
-              {requestsList.length === 0
-                ? "No requests Sent"
-                : requestsList.map((req) => (
-                    <li className="py-3 sm:py-4" key={req._id}>
-                      <div className="flex items-center space-x-4">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium truncate text-[#4f46e]">
-                            {req.status.toUpperCase()}
-                          </p>
-                          <p className="text-sm truncate text-gray-400">
-                            {new Date(req.leaving_date)
-                              .toDateString()
-                              .slice(4, 10)}{" "}
-                            to{" "}
-                            {new Date(req.return_date)
-                              .toDateString()
-                              .slice(4, 10)}
-                          </p>
-                        </div>
-                        <div className="flex flex-col items-center text-base font-semibold text-[#4f46e]">
-                          {new Date(req.request_date)
-                            .toDateString()
-                            .slice(4, 10)}
-                        </div>
+            <ul className="divide-y divide-gray-300 text-[#4f46e]">
+              {requestsList.length === 0 ? (
+                <li className="text-center text-sm">No requests Sent</li>
+              ) : (
+                requestsList.map((req) => (
+                  <li className="py-3" key={req._id}>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-sm font-medium">{req.status.toUpperCase()}</p>
+                        <p className="text-sm text-gray-500">
+                          {new Date(req.leaving_date).toDateString().slice(4, 10)} to{" "}
+                          {new Date(req.return_date).toDateString().slice(4, 10)}
+                        </p>
                       </div>
-                    </li>
-                  ))}
+                      <p className="text-sm font-semibold text-gray-600">
+                        {new Date(req.request_date).toDateString().slice(4, 10)}
+                      </p>
+                    </div>
+                  </li>
+                ))
+              )}
             </ul>
           </div>
         </div>
       </div>
-      <div className="mb-8">
+
       <form
         method="POST"
         onSubmit={requestMessOff}
-        className="bg-white py-5 px-10 rounded-lg shadow-xl w-full sm:w-auto"
+        className="bg-white w-full max-w-xl p-6 rounded-lg shadow-xl mb-10"
       >
-        <div className="flex gap-5 ">
-          <Input field={leavingDate} className="bg-white" />
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Input field={leavingDate} />
           <Input field={returningDate} />
         </div>
         <button
           type="submit"
-          className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 text-xl rounded-lg px-5 py-2.5 mt-5 text-center"
+          className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 text-lg sm:text-xl rounded-lg px-5 py-2.5 mt-5"
         >
           {loading ? (
-            <div>{loader} Sending Request...</div>
+            <div className="flex items-center gap-2 justify-center">
+              {loader} Sending Request...
+            </div>
           ) : (
-            "Request Mess off"
+            "Request Mess Off"
           )}
         </button>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
+        <ToastContainer theme="dark" />
       </form>
-      </div>
     </div>
   );
 }
 
 export default Mess;
+
+

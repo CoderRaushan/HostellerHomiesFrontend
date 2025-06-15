@@ -72,7 +72,7 @@ function TeamCard({ member }) {
               </svg>
               </a>
             </button>
-            <button className="p-2 text-gray-600 hover:text-[#4f46e5] transition-colors">
+            {/* <button className="p-2 text-gray-600 hover:text-[#4f46e5] transition-colors">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -87,7 +87,7 @@ function TeamCard({ member }) {
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

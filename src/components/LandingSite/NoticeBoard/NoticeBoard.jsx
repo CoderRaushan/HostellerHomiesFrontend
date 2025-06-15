@@ -187,7 +187,6 @@ const NoticeBoard = () => {
         </DialogTitle>
         <DialogContent className="mt-6" sx={{ p: 3, pt: 4 }}>
           <TextField
-            
             autoFocus
             label="Notice Title"
             fullWidth
