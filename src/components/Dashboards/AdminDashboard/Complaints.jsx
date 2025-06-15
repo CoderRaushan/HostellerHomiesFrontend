@@ -21,7 +21,6 @@ function Complaints() {
     });
 
     const data = await response.json();
-    //  console.log(data);
     if (data.success) {
       const complaints = data.complaints.map((complaint) => {
         const date = new Date(complaint.date).toLocaleDateString("en-US", {
