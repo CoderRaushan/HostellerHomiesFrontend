@@ -21,6 +21,7 @@ function Complaints() {
     });
 
     const data = await response.json();
+    //  console.log(data);
     if (data.success) {
       const complaints = data.complaints.map((complaint) => {
         const date = new Date(complaint.date).toLocaleDateString("en-US", {
@@ -29,13 +30,13 @@ function Complaints() {
           year: "numeric",
         });
         return {
-          id: complaint._id,
-          type: complaint.type,
-          title: complaint.title,
-          desc: complaint.description,
-          student: complaint.student.name,
-          room: complaint.student.room_no,
-          status: complaint.status,
+          id: complaint?._id,
+          type: complaint?.type,
+          title: complaint?.title,
+          desc: complaint?.description,
+          student: complaint?.student?.name,
+          room: complaint?.student?.room_no,
+          status: complaint?.status,
           date,
         };
       });
