@@ -323,6 +323,7 @@ function RegisterStudent() {
   const [dob, setDob] = useState("");
   const [uidai, setuidai] = useState("");
   const [password, setPassword] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
   const [loading, setLoading] = useState(false);
 
   const registerStudent = async (e) => {
@@ -344,6 +345,7 @@ function RegisterStudent() {
         uidai,
         hostel,
         password,
+        accountNumber,
       };
 
       const res = await fetch(`${mainUri}/api/student/register-student`, {
@@ -359,7 +361,7 @@ function RegisterStudent() {
         // Reset all fields
         seturn(""); setName(""); setRoomNo(""); setBatch(""); setDept(""); setCourse("");
         setEmail(""); setFatherName(""); setContact(""); setAddress(""); setDob("");
-        setuidai(""); setPassword("");
+        setuidai(""); setPassword(""); setAccountNumber("");
       } else {
         data.errors.forEach(err =>
           toast.error(err.msg || "Registration failed.")
@@ -477,6 +479,15 @@ function RegisterStudent() {
               req: true,
               value: dept,
               onChange: (e) => setDept(e.target.value),
+            }} />
+            {/* ................................... */}
+            <Input field={{
+              name: "accountNumber",
+              placeholder: "account number",
+              type: "text",
+              req: true,
+              value: accountNumber,
+              onChange: (e) => setAccountNumber(e.target.value),
             }} />
           </div>
 

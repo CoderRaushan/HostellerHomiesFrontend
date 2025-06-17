@@ -33,6 +33,7 @@ import Event from "./components/Dashboards/StudentDashboard/Event";
 import EventRequestVerification from "./components/Dashboards/AdminDashboard/EventRequestVerification";
 import SecurityGuardDetails from "./components/Dashboards/StudentDashboard/SecurityGuardDetails";
 import SecurityGuardSelector from "./components/Dashboards/AdminDashboard/SecurityGuardSelector";
+import StudentEditForm from "./components/Dashboards/AdminDashboard/StudentEditForm";
 
 
 function App() {
@@ -68,14 +69,14 @@ function App() {
           <Route path='register-student' element={<RegisterStudent />} />
           <Route path="attendance" element={<AdminAttendance />} />
           <Route path="complaints" element={<AdminComplaints />} />
-          <Route path="invoices" element={<AdminInvoices/>} />
+          {/* <Route path="invoices" element={<AdminInvoices/>} /> */}
           <Route path="suggestions" element={<AdminSuggestions/>} />
           <Route path="settings" element={<AdminSettings/>} />
           <Route path="all-students" element={<AllStudents/>}/>
           <Route path="mess" element={<AdminMess />} />
           <Route path="event-request-verification" element={<EventRequestVerification />} />
           <Route path="security-guard-selector" element={<SecurityGuardSelector />} />
-
+          <Route path="student/:id" element={<StudentEditForm />} />
         </Route>
       </Routes>
     </>

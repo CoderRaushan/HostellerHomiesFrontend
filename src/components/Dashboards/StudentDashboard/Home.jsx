@@ -10,48 +10,44 @@ const List = () => {
       amount: "Rs. 690",
       status: "pending",
     },
-    {
-      title: "Mess bill",
-      date: "20-5-2023",
-      amount: "Rs. 690",
-      status: "pending",
-    },
+    
   ]);
 
   useEffect(() => {
-    let student = JSON.parse(localStorage.getItem("student"));
-    fetch(`${mainUri}/api/invoice/student`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ student: student._id }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          let invoices = data.invoices;
-          let list = [];
-          invoices.forEach((invoice) => {
-            if (invoice.status.toLowerCase() === "pending") {
-              let date = new Date(invoice.date);
-              invoice.date = date.toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              });
-              list.push({
-                title: invoice.title,
-                amount: "Rs. " + invoice.amount,
-                status: invoice.status,
-                date: invoice.date,
-              });
-            }
-          });
-          setInvoiceList(list);
-        }
-      });
-  }, [invoiceList.length]);
+  let student = JSON.parse(localStorage.getItem("student"));
+  fetch(`${mainUri}/api/invoice/student`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ student: student._id }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Invoice API response:", data); // <-- Add this line
+      if (data.success) {
+        let invoice = data.invoices[0];
+        let list = [];
+        invoices.forEach((invoice) => {
+          if (invoice.status.toLowerCase() === "pending") {
+            let date = new Date(invoice.date);
+            invoice.date = date.toLocaleDateString("en-US", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            });
+            list.push({
+              title: invoice.title,
+              amount: "Rs. " + invoice.amount,
+              status: invoice.status,
+              date: invoice.date,
+            });
+          }
+        });
+        setInvoiceList(list);
+      }
+    });
+}, []);
 
   return (
     <div className="w-full max-w-md p-6 rounded-2xl shadow-lg bg-white overflow-y-auto max-h-96">
