@@ -968,6 +968,7 @@ function Suggestions() {
           </div>
         </div>
 
+
         {/* Footer */}
         <div className="flex justify-end items-center px-6 mt-6">
           <button
