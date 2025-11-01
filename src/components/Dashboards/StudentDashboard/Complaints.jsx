@@ -88,33 +88,40 @@ function Complaints() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_MAIN_URI}/api/complaint/register`,
-        {
-          student: student._id,
-          hostel: student.hostel,
-          type,
-          title,
-          description: desc,
-        }
-      );
-
-      if (res.status === 200 || res.status === 201) {
-        setNotification({
-          message: "Complaint Registered Successfully!",
-          type: "success",
-        });
-        setTitle("");
-        setDesc("");
-        setType("Electric");
-        fetchComplaints();
-      }
-    } catch (err) {
-      console.error(err);
-      setNotification({ message: "Registration failed!", type: "error" });
-    } finally {
-      setLoading(false);
+  const res = await axios.post(
+    `${import.meta.env.VITE_MAIN_URI}/api/complaint/register`,
+    {
+      student: student._id,
+      hostel: student.hostel,
+      type,
+      title,
+      description: desc,
     }
+  );
+
+  // ✅ Fetch message directly from backend
+  setNotification({
+    message: res.data.msg || "Complaint Registered Successfully!",
+    type: res.data.success ? "success" : "error",
+  });
+
+  if (res.data.success) {
+    setTitle("");
+    setDesc("");
+    setType("Electric");
+    fetchComplaints();
+  }
+} catch (err) {
+  console.error(err);
+
+  // ❌ Show backend error if available
+  setNotification({
+    message:
+      err.response?.data?.msg || "Something went wrong while registering complaint!",
+    type: "error",
+  });
+}
+
   };
 
   return (
