@@ -445,7 +445,6 @@
 
 // export default Home;
 
-
 import { ShortCard } from "./ShortCard";
 import { List } from "./List";
 import { useEffect, useState } from "react";
@@ -460,6 +459,7 @@ import {
 } from "recharts";
 import { getAllStudents } from "../../../../utils";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function Home() {
   const mainUri = import.meta.env.VITE_MAIN_URI;
@@ -570,25 +570,44 @@ function Home() {
   }, []);
 
   const messIcon = (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-      strokeWidth={1.5} stroke="#4f46e5" className="w-6 h-6">
-      <path strokeLinecap="round" strokeLinejoin="round"
-        d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="#4f46e5"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
+      />
     </svg>
   );
 
   const suggestionIcon = (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-      strokeWidth={1.5} stroke="#4f46e5" className="w-6 h-6">
-      <path strokeLinecap="round" strokeLinejoin="round"
-        d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="#4f46e5"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
     </svg>
   );
 
   const data = transformApiData(complaints);
 
-  const graph = (
-    <div className="bg-white p-4 rounded-xl shadow-md w-full sm:w-[48%] lg:w-[32%] h-[280px]">
+const graph = (
+  <div className="bg-gradient-to-br from-white to-gray-50 p-5 rounded-2xl shadow-lg border border-gray-100 w-full sm:w-[48%] lg:w-[32%] h-[320px] flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1">
+    <div className="flex-1">
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={data}
@@ -597,30 +616,47 @@ function Home() {
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.9} />
-              <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.1} />
+              <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.05} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
+          <XAxis dataKey="name" tick={{ fill: "#6b7280", fontSize: 12 }} />
+          <YAxis tick={{ fill: "#6b7280", fontSize: 12 }} />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "#ffffff",
+              border: "1px solid #e5e7eb",
+              borderRadius: "8px",
+            }}
+          />
           <Legend verticalAlign="top" height={36} />
           <Area
             type="monotone"
             dataKey="DailyComplaints"
             stroke="#4f46e5"
+            strokeWidth={2}
             fillOpacity={1}
             fill="url(#colorUv)"
           />
         </AreaChart>
       </ResponsiveContainer>
     </div>
-  );
+
+    <Link
+      to="/admin-dashboard/complaints"
+      className="py-3 text-lg text-center rounded-lg w-full text-black border-blue-600 border-2 hover:bg-blue-600 transition-all"
+    >
+      Manage Complaints
+    </Link>
+  </div>
+);
+
 
   return (
     <div className="min-h-screen w-full bg-[#f3e8ff] px-4 sm:px-8 md:px-16 pt-10 pb-20 overflow-x-hidden overflow-y-auto lg:pl-64">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center gap-6 mt-10">
         <h1 className="text-black font-bold text-4xl sm:text-5xl text-center">
-          Welcome <span className="text-[#4f46e5]">{admin?.name || "admin"}!</span>
+          Welcome{" "}
+          <span className="text-[#4f46e5]">{admin?.name || "admin"}!</span>
         </h1>
         <h2 className="text-black text-xl text-center">
           Manager, {hostels?.hostel?.name || "Hostel"}
@@ -640,7 +676,11 @@ function Home() {
           </div>
           {graph}
           <div className="w-full sm:w-[48%] lg:w-[32%]">
-            <List list={suggestions} title="suggestions" icon={suggestionIcon} />
+            <List
+              list={suggestions}
+              title="suggestions"
+              icon={suggestionIcon}
+            />
           </div>
         </div>
       </div>

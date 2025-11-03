@@ -23,6 +23,8 @@
     "chart.js": "^4.3.0",
     "emailjs": "^4.0.2",
     "framer-motion": "^12.9.2",
+    "jspdf": "^3.0.3",
+    "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.487.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
