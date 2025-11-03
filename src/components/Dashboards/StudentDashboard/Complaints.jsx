@@ -72,7 +72,7 @@ function Complaints() {
           student: student._id,
         }
       );
-      console.log(res.data.complaints);
+     
       setRegComplaints(res.data.complaints || []);
     } catch (err) {
       console.error("Error fetching complaints:", err);
@@ -232,7 +232,6 @@ function Complaints() {
             ) : (
               regComplaints.map(
                 (complain, index) => (
-                  console.log(complain.status),
                   (
                     // <li key={index} className="py-3">
                     //   <div className="flex items-center space-x-4">

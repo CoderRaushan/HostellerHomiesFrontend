@@ -24,7 +24,7 @@ const List = () => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("Invoice API response:", data); // <-- Add this line
+
       if (data.success) {
         let invoice = data.invoices[0];
         let list = [];

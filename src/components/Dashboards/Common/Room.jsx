@@ -34,7 +34,6 @@ export default function Room() {
   const fetchRooms = async () => {
     try {
       const { data } = await axios.get(`${mainUri}/api/rooms/all`);
-      console.log("Fetched rooms data:", data);
       if (Array.isArray(data)) setRooms(data);
       else if (Array.isArray(data.rooms)) setRooms(data.rooms);
       else if (Array.isArray(data.data)) setRooms(data.data);

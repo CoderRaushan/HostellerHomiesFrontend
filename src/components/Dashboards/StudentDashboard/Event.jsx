@@ -35,7 +35,7 @@ const Event = () => {
   // ✅ Fetch all events of current student
   const fetchEvents = async () => {
   try {
-    console.log("studentId", studentId);
+
     setLoading(true);
 
     // ✅ Pass studentId in the request body correctly
@@ -92,7 +92,7 @@ const Event = () => {
 
     try {
       const response = await axios.post(`${mainUri}/api/Event/EventFund`, payload);
-      console.log(response)
+     
       if (response.data.success) {
         toast.success("Event Fund Submitted Successfully!");
         setFormData({ eventDetails: "", fundRequired: "", hostelNumber: "" });
@@ -101,7 +101,7 @@ const Event = () => {
         toast.error(response.data.message || "Something went wrong!");
       }
     } catch (error) {
-      console.log(error);
+    
       toast.error(error.response?.data?.message || "Server Error!");
     }
   };

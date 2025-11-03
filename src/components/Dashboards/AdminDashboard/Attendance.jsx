@@ -366,7 +366,6 @@ function Attendance() {
 
       const data = await res.json();
       if (data.success) {
-        console.log("Attendance Data:", data.attendance);
         setStudentAttendance(data.attendance);
       } else {
         toast.error("Unable to fetch student attendance", { theme: "dark" });
@@ -380,7 +379,6 @@ function Attendance() {
   const handleViewAttendance = async (student) => {
     setSelectedStudent(student);
     setShowModal(true);
-    // console.log("student id", student._id);
     await fetchStudentAttendance(student._id);
   };
 
