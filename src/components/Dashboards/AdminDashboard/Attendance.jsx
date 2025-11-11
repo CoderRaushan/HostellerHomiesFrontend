@@ -55,7 +55,7 @@ function Attendance() {
 
       setProgress(70);
 
-      const data = await getAllStudents();
+      const data = await getAllStudents(guard?.hostelNo);
       const allStudents = data.students;
       setStudents(allStudents);
 

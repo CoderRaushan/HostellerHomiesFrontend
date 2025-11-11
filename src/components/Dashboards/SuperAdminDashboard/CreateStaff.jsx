@@ -293,11 +293,11 @@ const CreateStaff = () => {
             className="pl-3 w-full pr-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
           >
             <option value="">-- Select Role --</option>
+            <option value="Warden">Warden</option>
             <option value="Caretaker">Caretaker</option>
             <option value="Manager">Manager</option>
-            <option value="Warden">Warden</option>
-            <option value="Guard">Guard</option>
-            <option value="PrivilegedStudent">PrivilegedStudent</option>
+            <option value="SecurityIncharge">Security Incharge</option>
+            <option value="PrivilegedStudent">Privileged Student</option>
           </select>
 
           {/* Hostel No */}
@@ -314,6 +314,7 @@ const CreateStaff = () => {
             <option value="3">Hostel 3</option>
             <option value="4">Hostel 4</option>
             <option value="5">Hostel 5</option>
+            <option value="NA">NA</option>
           </select>
 
           <button

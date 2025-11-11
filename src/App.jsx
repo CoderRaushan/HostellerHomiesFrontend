@@ -39,7 +39,6 @@ import SuperAdminIndex from "./components/Dashboards/SuperAdminDashboard/SuperAd
 import SAHome from "./components/Dashboards/SuperAdminDashboard/Home/SAHome.jsx";
 import { useEffect } from "react";
 import CreateStaff from "./components/Dashboards/SuperAdminDashboard/CreateStaff.jsx";
-import UpdateStaff from "./components/Dashboards/SuperAdminDashboard/UpdateStaff.jsx";
 import SAProfile from "./components/Dashboards/SuperAdminDashboard/SAProfile.jsx";
 import ManagerIndex from "./components/Dashboards/ManagerDashboard/ManagerIndex.jsx";
 import ManagerHome from "./components/Dashboards/ManagerDashboard/Home/ManagerHome.jsx";
@@ -53,7 +52,14 @@ import GuardIndex from "./components/Dashboards/Guard/GuardIndex.jsx";
 import GuardHome from "./components/Dashboards/Guard/Home/GuardHome.jsx";
 import WardenIndex from "./components/Dashboards/WardenDashboard/GuardIndex.jsx";
 import WardendHome from "./components/Dashboards/WardenDashboard/Home/WardenHome.jsx";
-
+import SIIndex from "./components/Dashboards/SecurityInchargeDashboard/SIIndex.jsx";
+import SIHome from "./components/Dashboards/SecurityInchargeDashboard/SIHome.jsx";
+import Rooms from "./components/Dashboards/SuperAdminDashboard/Rooms.jsx";
+import CreateGuard from "./components/Dashboards/SecurityInchargeDashboard/CreateGuard.jsx";
+import UpdateGuard from "./components/Dashboards/SecurityInchargeDashboard/UpdateGuard.jsx";
+import StudentRooms from "./components/Dashboards/StudentDashboard/StudentRooms.jsx";
+import SARooms from "./components/Dashboards/SuperAdminDashboard/SARooms.jsx";
+import SAAllStudent from "./components/Dashboards/SuperAdminDashboard/SAAllStudent.jsx";
 function App() {
   return (
     <>
@@ -81,7 +87,7 @@ function App() {
           <Route path="invoices" element={<Invoices />} />
           <Route path="settings" element={<Settings />} />
           <Route path="event" element={<Event />} />
-          <Route path="rooms" element={<Room />} />
+          <Route path="rooms" element={<StudentRooms />} />
           <Route
             path="security-guard-detail"
             element={<SecurityGuardDetails />}
@@ -92,8 +98,9 @@ function App() {
         <Route path="/superadmin-dashboard" element={<SuperAdminIndex />}>
           <Route index element={<SAHome />} />
           <Route path="create-staff" element={<CreateStaff />} />
-          <Route path="update-staff" element={<UpdateStaff />} />
           <Route path="profile" element={<SAProfile />} />
+          <Route path="rooms" element={<SARooms />} />
+          <Route path="all-student" element={<SAAllStudent/>} />
         </Route>
         {/* manager-dashboard */}
         <Route path="/manager-dashboard" element={<ManagerIndex />}>
@@ -111,10 +118,6 @@ function App() {
           <Route path="all-students" element={<AllStudents />} />
           <Route path="student/:id" element={<StudentEditForm />} />
           <Route path="rooms" element={<Room />} />
-          <Route
-            path="security-guard-selector"
-            element={<SecurityGuardSelector />}
-          />
         </Route>
         {/* Guard Dashboard */}
         <Route path="/guard-dashboard" element={<GuardIndex />}>
@@ -131,6 +134,17 @@ function App() {
             element={<EventRequestVerification />}
           />
           <Route path="rooms" element={<Room />} />
+        </Route>
+
+        {/* SecurityIncharge dashboard */}
+        <Route path="/securityincharge-dashboard" element={<SIIndex />}>
+          <Route index element={<SIHome />} />
+          <Route path="create-guard" element={<CreateGuard />} />
+          <Route path="update-guard" element={<UpdateGuard />} />
+           <Route
+            path="manage-guard"
+            element={<SecurityGuardSelector />}
+          />
         </Route>
 
         <Route path="/admin-dashboard" element={<AdminIndex />}>

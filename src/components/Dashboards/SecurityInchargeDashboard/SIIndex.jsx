@@ -3,12 +3,12 @@ import { Sidebar } from "../Common/Sidebar";
 import { Topbar } from "../Common/Topbar";
 import { useEffect, useState } from "react";
 
-export default function CaretakerIndex() {
-  const dashboard = "Caretaker";
+export default function SIIndex() {
+  const dashboard = "SecurityIncharge";
   const links = [
     {
       text: "Home",
-      url: "/caretaker-dashboard",
+      url: "/securityincharge-dashboard",
       for: dashboard,
       svg: (
         <svg
@@ -28,8 +28,8 @@ export default function CaretakerIndex() {
       ),
     },
     {
-      text: "Register Student",
-      url: "/caretaker-dashboard/register-student",
+      text: "Create Guard",
+      url: "/securityincharge-dashboard/create-guard",
       svg: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -42,14 +42,14 @@ export default function CaretakerIndex() {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
+            d="M9 12l2 2 4-4m2-4h.01M9 2h6a2 2 0 012 2v1a2 2 0 002 2v11a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 002-2V4a2 2 0 012-2z"
           />
         </svg>
       ),
     },
     {
-      text: "All Students",
-      url: "/caretaker-dashboard/all-students",
+      text: "Update Guard",
+      url: "/securityincharge-dashboard/update-guard",
       svg: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -62,14 +62,14 @@ export default function CaretakerIndex() {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+            d="M9 12l2 2 4-4m2-4h.01M9 2h6a2 2 0 012 2v1a2 2 0 002 2v11a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 002-2V4a2 2 0 012-2z"
           />
         </svg>
       ),
     },
     {
-      text: "Rooms",
-      url: "/caretaker-dashboard/rooms",
+      text: "Manage Guard",
+      url: "/securityincharge-dashboard/manage-guard",
       svg: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -82,12 +82,11 @@ export default function CaretakerIndex() {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M2.25 18.75V9.75a2.25 2.25 0 012.25-2.25h15a2.25 2.25 0 012.25 2.25v9m-19.5 0h19.5m-15-9V6a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 0110.5 6v3.75m-3 0h6"
+            d="M9 12l2 2 4-4m2-4h.01M9 2h6a2 2 0 012 2v1a2 2 0 002 2v11a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 002-2V4a2 2 0 012-2z"
           />
         </svg>
       ),
     },
-    
   ];
 
   const caretaker = JSON.parse(localStorage.getItem("Caretaker"));

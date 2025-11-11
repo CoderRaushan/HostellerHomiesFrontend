@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-function SAProfile() {
+function SIHome() {
   const Sadmin = JSON.parse(localStorage.getItem("SuperAdmin"));
 
   return (
@@ -51,4 +51,4 @@ function SAProfile() {
   );
 }
 
-export default SAProfile;
+export default SIHome;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-export default function Room() {
+export default function StudentRooms() {
   const [rooms, setRooms] = useState([]);
   const [search, setSearch] = useState("");
   const [visible, setVisible] = useState(20);
   const loaderRef = useRef(null);
-  const caretaker = JSON.parse(localStorage.getItem("Caretaker"));
+  const student = JSON.parse(localStorage.getItem("Student"));
   const token = localStorage.getItem("token");
   const mainUri = import.meta.env.VITE_MAIN_URI;
 
@@ -34,7 +34,7 @@ export default function Room() {
   const fetchRooms = async () => {
     try {
       const { data } = await axios.get(
-        `${mainUri}/api/rooms/all?hostelNo=${caretaker.hostelNo}`);
+        `${mainUri}/api/rooms/all?hostelNo=${student.hostelNo}`);
       if (Array.isArray(data)) setRooms(data);
       else if (Array.isArray(data.rooms)) setRooms(data.rooms);
       else if (Array.isArray(data.data)) setRooms(data.data);

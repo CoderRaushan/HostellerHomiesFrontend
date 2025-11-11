@@ -1,18 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-export default function Room() {
+export default function Rooms() {
   const [rooms, setRooms] = useState([]);
   const [search, setSearch] = useState("");
   const [visible, setVisible] = useState(20);
   const loaderRef = useRef(null);
-  const caretaker = JSON.parse(localStorage.getItem("Caretaker"));
-  const token = localStorage.getItem("token");
+
   const mainUri = import.meta.env.VITE_MAIN_URI;
 
   // ✅ Fetch rooms once
   useEffect(() => {
     fetchRooms();
+    
   }, []);
 
   // ✅ Infinite Scroll using IntersectionObserver
@@ -33,8 +33,7 @@ export default function Room() {
   // ✅ Fetch room data from backend
   const fetchRooms = async () => {
     try {
-      const { data } = await axios.get(
-        `${mainUri}/api/rooms/all?hostelNo=${caretaker.hostelNo}`);
+      const { data } = await axios.get(`${mainUri}/api/rooms/all`);
       if (Array.isArray(data)) setRooms(data);
       else if (Array.isArray(data.rooms)) setRooms(data.rooms);
       else if (Array.isArray(data.data)) setRooms(data.data);
@@ -44,6 +43,8 @@ export default function Room() {
       setRooms([]);
     }
   };
+
+
 
   // ✅ Filter rooms
   const filteredRooms = Array.isArray(rooms)

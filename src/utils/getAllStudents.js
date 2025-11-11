@@ -1,4 +1,4 @@
-const getAllStudents = async () => {
+const getAllStudents = async (hostelNo) => {
     const mainUri = import.meta.env.VITE_MAIN_URI;
     const token = localStorage.getItem("token");
     const result = await fetch(`${mainUri}/api/student/get-all-students`, {
@@ -7,7 +7,7 @@ const getAllStudents = async () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ name: "1" }),
+        body: JSON.stringify({ name: hostelNo ||"1" }),
     });
     const data = await result.json();
     return data;

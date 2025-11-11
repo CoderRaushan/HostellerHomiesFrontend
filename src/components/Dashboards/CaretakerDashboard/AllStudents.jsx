@@ -6,9 +6,8 @@ import { Link } from "react-router-dom";
 
 function AllStudents() {
   const mainUri = import.meta.env.VITE_MAIN_URI;
-
+ const token = localStorage.getItem("token");;
   const getCSV = async () => {
-    const token = localStorage.getItem("token");
     const caretaker = JSON.parse(localStorage.getItem("caretaker"));
     const res = await fetch(`${mainUri}/api/student/csv`, {
       method: "POST",
@@ -31,7 +30,7 @@ function AllStudents() {
   };
 
   const getAll = async () => {
-    const data = await getAllStudents();
+    const data = await getAllStudents(caretaker?.hostelNo);
     setAllStudents(data.students);
   };
 

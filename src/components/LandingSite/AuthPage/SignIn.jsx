@@ -272,6 +272,9 @@ export default function SignIn() {
             else if (result.data.Detail.role === "PrivilegedStudent") {
               navigate("/privileged-student-dashboard");
             }
+             else if (result.data.Detail.role === "SecurityIncharge") {
+              navigate("/securityincharge-dashboard");
+            }
             else {
               navigate("/student-dashboard");
             }
@@ -368,13 +371,14 @@ export default function SignIn() {
                     className="pl-3 w-full pr-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                   >
                     <option value="">-- Select Role --</option>
-                    <option value="SuperAdmin">SuperAdmin</option>
+                    <option value="SuperAdmin">Super Admin</option>
                     <option value="Caretaker">Caretaker</option>
                     <option value="Manager">Manager</option>
                     <option value="Warden">Warden</option>
+                    <option value="SecurityIncharge">Security Incharge</option>
                     <option value="Guard">Guard</option>
                     <option value="Student">Student</option>
-                    <option value="PrivilegeStudent">PrivilegeStudent</option>
+                    <option value="PrivilegeStudent">Privileged Student</option>
                   </select>
                 </div>
               </div>

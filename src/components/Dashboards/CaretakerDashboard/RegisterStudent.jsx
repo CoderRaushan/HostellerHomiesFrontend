@@ -9,7 +9,7 @@ import { json } from "react-router-dom";
 function RegisterStudent() {
   const mainUri = import.meta.env.VITE_MAIN_URI;
   const token = localStorage.getItem("token");
-
+  const caretaker=JSON.parse(localStorage.getItem("Caretaker"));
   const [urn, seturn] = useState("");
   const [name, setName] = useState("");
   const [room_no, setRoomNo] = useState("");
@@ -24,9 +24,7 @@ function RegisterStudent() {
   const [uidai, setuidai] = useState("");
   const [password, setPassword] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
-  const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
-  const [hostelNo, setHostelNo] = useState("");
 
   const registerStudent = async (e) => {
     e.preventDefault();
@@ -45,9 +43,9 @@ function RegisterStudent() {
         address,
         dob,
         uidai,
-        hostelNo,
+        hostelNo:caretaker?.hostelNo,
         password,
-        role,
+        role:"Student",
         accountNumber,
       };
 
@@ -77,7 +75,6 @@ function RegisterStudent() {
         setuidai("");
         setPassword("");
         setAccountNumber("");
-        setRole("");
       } else {
         data.errors.forEach((err) =>
           toast.error(err.msg || "Registration failed.")
@@ -200,21 +197,6 @@ function RegisterStudent() {
                 onChange: (e) => setRoomNo(e.target.value),
               }}
             />
-            <select
-              name="hostelNo"
-              id="hostelNo"
-              className="bg-gray-200 p-1"
-              value={hostelNo}
-              onChange={(e) => setHostelNo(e.target.value)}
-              required
-            >
-              <option value="">Select Hostel</option>
-              <option value="1">Hostel No 1</option>
-              <option value="2">Hostel No 2</option>
-              <option value="3">Hostel No 3</option>
-              <option value="4">Hostel No 4</option>
-              <option value="5">Hostel No 5</option>
-            </select>
 
             <Input
               field={{
@@ -237,17 +219,6 @@ function RegisterStudent() {
                 onChange: (e) => setAccountNumber(e.target.value),
               }}
             />
-
-            <select
-              name="role"
-              className="bg-gray-200 p-1"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              required
-            >
-              <option value="">Select Role</option>
-              <option value="Student">Student</option>
-            </select>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

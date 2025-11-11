@@ -71,19 +71,16 @@ function SecurityGuardDetails() {
               className="mb-6 p-4 sm:p-6 rounded-2xl shadow-md bg-[#f9f9f9]"
             >
               <p className="text-base sm:text-lg font-semibold mb-2 text-black">
-                <span className="text-[#4f46e5]">Guard ID:</span> {guard.guardId}
+                <span className="text-[#4f46e5]">Name:</span> {guard.name}
               </p>
               <p className="text-base sm:text-lg font-semibold mb-2 text-black">
-                <span className="text-[#4f46e5]">Name:</span> {guard.name}
+                <span className="text-[#4f46e5]">Email:</span> {guard.email}
               </p>
               <p className="text-base sm:text-lg font-semibold mb-2 text-black">
                 <span className="text-[#4f46e5]">Shift:</span> {guard.shift}
               </p>
               <p className="text-base sm:text-lg font-semibold mb-2 text-black">
-                <span className="text-[#4f46e5]">Contact:</span> {guard.contact}
-              </p>
-              <p className="text-base sm:text-lg font-semibold mb-2 text-black">
-                <span className="text-[#4f46e5]">Post:</span> {guard.post}
+                <span className="text-[#4f46e5]">Contact:</span> {guard.phone}
               </p>
               <p className="text-base sm:text-lg font-semibold text-black">
                 <span className="text-[#4f46e5]">Status:</span>{" "}

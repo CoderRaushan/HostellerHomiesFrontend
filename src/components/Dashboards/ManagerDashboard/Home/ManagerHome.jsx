@@ -28,7 +28,7 @@ function ManagerHome() {
   const token = localStorage.getItem("token");
 
   const getStudentCount = async () => {
-    const res = await getAllStudents();
+    const res = await getAllStudents(manager?.hostelNo);
     if (res.success) {
       setNoOfStudents(res.students.length);
     }
