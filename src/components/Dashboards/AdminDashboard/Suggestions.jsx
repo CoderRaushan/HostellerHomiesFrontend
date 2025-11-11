@@ -666,16 +666,19 @@ function Suggestions() {
   const [modalData, setModalData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchHistory, setSearchHistory] = useState("");
+  const token = localStorage.getItem("token");
+  const manager = JSON.parse(localStorage.getItem("Manager"));
 
   // Fetch all pending suggestions by hostel
   const getSuggestions = async () => {
     try {
       setLoading(true);
-      const hostels = JSON.parse(localStorage.getItem("admin"));
       const response = await fetch(`${mainUri}/api/suggestion/hostel`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ hostel: hostels?.hostel }),
+        headers: { "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ HostelNo: manager.hostelNo || "1" }),
       });
 
       const data = await response.json();
@@ -697,7 +700,14 @@ function Suggestions() {
   const getHistory = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${mainUri}/api/suggestion/admin/history`);
+      const response = await fetch(`${mainUri}/api/suggestion/admin/history`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.json();
       if (data.success) setHistory(data.suggestions);
       else toast.error("Failed to fetch history");

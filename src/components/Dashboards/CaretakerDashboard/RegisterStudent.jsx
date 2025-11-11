@@ -26,7 +26,7 @@ function RegisterStudent() {
   const [accountNumber, setAccountNumber] = useState("");
   const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
-  const [hostel, setHostel] = useState("");
+  const [hostelNo, setHostelNo] = useState("");
 
   const registerStudent = async (e) => {
     e.preventDefault();
@@ -45,7 +45,7 @@ function RegisterStudent() {
         address,
         dob,
         uidai,
-        hostel,
+        hostelNo,
         password,
         role,
         accountNumber,
@@ -139,7 +139,7 @@ function RegisterStudent() {
               }}
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-black">
             <Input
               field={{
                 name: "email",
@@ -201,11 +201,11 @@ function RegisterStudent() {
               }}
             />
             <select
-              name="hostel"
-              id="hostel"
+              name="hostelNo"
+              id="hostelNo"
               className="bg-gray-200 p-1"
-              value={hostel}
-              onChange={(e) => setHostel(e.target.value)}
+              value={hostelNo}
+              onChange={(e) => setHostelNo(e.target.value)}
               required
             >
               <option value="">Select Hostel</option>

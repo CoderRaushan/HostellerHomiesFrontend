@@ -11,9 +11,10 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 
 const Event = () => {
-  const storedStudent = JSON.parse(localStorage.getItem("student"));
-  const studentId = storedStudent?._id || "";
+  const storedStudent = JSON.parse(localStorage.getItem("Student"));
+  const studentId = storedStudent?.id || "";
   const mainUri = import.meta.env.VITE_MAIN_URI;
+  const token = localStorage.getItem("token");
 
   const [formData, setFormData] = useState({
     eventDetails: "",
@@ -41,7 +42,12 @@ const Event = () => {
     // ✅ Pass studentId in the request body correctly
     const res = await axios.post(
       `${mainUri}/api/Event/EventFund/student/get`,
-      { studentId }
+      { studentId },
+      {
+        headers: { "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+         },
+      }
     );
 
     if (res.data.success) {
@@ -91,7 +97,13 @@ const Event = () => {
     };
 
     try {
-      const response = await axios.post(`${mainUri}/api/Event/EventFund`, payload);
+      const response = await axios.post(`${mainUri}/api/Event/EventFund`, payload,
+        {
+          headers: { "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
      
       if (response.data.success) {
         toast.success("Event Fund Submitted Successfully!");

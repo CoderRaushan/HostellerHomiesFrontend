@@ -24,8 +24,13 @@ function Sidebar({ links }) {
   const hoverTimeoutRef = useRef(null);
 
   const logout = () => {
-    localStorage.removeItem("student");
+    localStorage.removeItem("SuperAdmin");
     localStorage.removeItem("token");
+    localStorage.removeItem("Manager");
+    localStorage.removeItem("Caretaker");
+    localStorage.removeItem("Guard");
+    localStorage.removeItem("PrivilegedStudent");
+    localStorage.removeItem("Student");
     navigate("/");
   };
 

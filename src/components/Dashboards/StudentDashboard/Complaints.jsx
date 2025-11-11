@@ -63,13 +63,19 @@ function Complaints() {
 
   const types = ["Electric", "Furniture", "Cleaning", "Others"];
 
-  const student = JSON.parse(localStorage.getItem("student"));
+  const student = JSON.parse(localStorage.getItem("Student"));
+  const token = localStorage.getItem("token");
   const fetchComplaints = async () => {
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_MAIN_URI}/api/complaint/student`,
         {
-          student: student._id,
+          student: student.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
      
@@ -91,7 +97,7 @@ function Complaints() {
   const res = await axios.post(
     `${import.meta.env.VITE_MAIN_URI}/api/complaint/register`,
     {
-      student: student._id,
+      student: student.id,
       hostel: student.hostel,
       type,
       title,
@@ -110,6 +116,7 @@ function Complaints() {
     setDesc("");
     setType("Electric");
     fetchComplaints();
+    setLoading(false);
   }
 } catch (err) {
   console.error(err);
@@ -121,7 +128,6 @@ function Complaints() {
     type: "error",
   });
 }
-
   };
 
   return (

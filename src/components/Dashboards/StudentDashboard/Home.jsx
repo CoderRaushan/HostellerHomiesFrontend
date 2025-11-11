@@ -14,7 +14,7 @@ const List = () => {
   ]);
 
   useEffect(() => {
-  let student = JSON.parse(localStorage.getItem("student"));
+  let student = JSON.parse(localStorage.getItem("Student"));
   fetch(`${mainUri}/api/invoice/student`, {
     method: "POST",
     headers: {
@@ -115,7 +115,7 @@ const List = () => {
 };
 
 function Home() {
-  let student = JSON.parse(localStorage.getItem("student"));
+  let student = JSON.parse(localStorage.getItem("Student"));
 
   const getAttendance = async () => {
     let student = JSON.parse(localStorage.getItem("student"));

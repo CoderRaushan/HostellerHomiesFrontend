@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,11 +11,17 @@ const EventRequestVerification = () => {
   const [statusUpdates, setStatusUpdates] = useState({});
   const [remarks, setRemarks] = useState({});
   const [activeTab, setActiveTab] = useState("Pending");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchEventData = async () => {
       try {
-        const response = await axios.get(`${mainUri}/api/Event/EventFund/get`);
+        const response = await axios.get(`${mainUri}/api/Event/EventFund/get`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setEvents(response.data.eventFundData);
       } catch (err) {
         setError(err.message);
@@ -57,11 +61,20 @@ const EventRequestVerification = () => {
     }
 
     try {
-      await axios.put(`${mainUri}/api/Event/EventFund/admin/update`, {
-        eventFundId: eventId,
-        status: selectedStatus,
-        remark: selectedStatus === "failed" ? remarkText : "not required",
-      });
+      await axios.put(
+        `${mainUri}/api/Event/EventFund/admin/update`,
+        {
+          eventFundId: eventId,
+          status: selectedStatus,
+          remark: selectedStatus === "failed" ? remarkText : "not required",
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setEvents((prevEvents) =>
         prevEvents.map((event) =>
@@ -69,7 +82,8 @@ const EventRequestVerification = () => {
             ? {
                 ...event,
                 status: selectedStatus,
-                remark: selectedStatus === "failed" ? remarkText : "not required",
+                remark:
+                  selectedStatus === "failed" ? remarkText : "not required",
               }
             : event
         )
@@ -130,16 +144,19 @@ const EventRequestVerification = () => {
                 Student Details
               </h3>
               <p className="text-gray-700">
-                <span className="font-medium text-black">Name:</span> {event.name}
+                <span className="font-medium text-black">Name:</span>{" "}
+                {event.name}
               </p>
               <p className="text-gray-700">
                 <span className="font-medium text-black">URN:</span> {event.urn}
               </p>
               <p className="text-gray-700">
-                <span className="font-medium text-black">Room No:</span> {event.roomNumber}
+                <span className="font-medium text-black">Room No:</span>{" "}
+                {event.roomNumber}
               </p>
               <p className="text-gray-700">
-                <span className="font-medium text-black">Hostel No:</span> {event.hostelNumber}
+                <span className="font-medium text-black">Hostel No:</span>{" "}
+                {event.hostelNumber}
               </p>
 
               <hr className="my-3" />
@@ -148,7 +165,9 @@ const EventRequestVerification = () => {
                 Event Details
               </h3>
               <p className="text-gray-700">
-                <span className="font-medium text-black">Event Description:</span>{" "}
+                <span className="font-medium text-black">
+                  Event Description:
+                </span>{" "}
                 {event.eventDetails}
               </p>
               <p className="text-gray-700">

@@ -168,13 +168,15 @@ function Topbar({ name, notifications = [], fullWidth = true }) {
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("admin");
-    localStorage.removeItem("hostel");
-    localStorage.removeItem("student");
+    localStorage.removeItem("SuperAdmin");
     localStorage.removeItem("token");
+    localStorage.removeItem("Manager");
+    localStorage.removeItem("Caretaker");
+    localStorage.removeItem("Guard");
+    localStorage.removeItem("PrivilegedStudent");
+    localStorage.removeItem("Student");
     navigate("/");
   };
-
   return (
     <div
       className={`py-5 px-5 flex items-center justify-between bg-white text-black w-full shadow-lg absolute top-0

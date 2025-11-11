@@ -183,13 +183,23 @@ function Suggestions() {
   const [desc, setDesc] = useState("");
   const [count, setCount] = useState(0);
   const [history, setHistory] = useState([]);
-
-  const student = JSON.parse(localStorage.getItem("student"));
+  const token = localStorage.getItem("token");
+  const student = JSON.parse(localStorage.getItem("Student"));
 
   // 🔹 Fetch today's suggestion count
   const fetchCount = async () => {
     try {
-      const response = await fetch(`${mainUri}/api/suggestion/count?student=${student._id}`);
+      const response = await fetch(
+        `${mainUri}/api/suggestion/count?student=${student.id}`,
+        {
+          headers: {
+            headers: {
+              contentType: "application/json",
+            },
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.json();
       setCount(data.count);
     } catch (error) {
@@ -200,7 +210,15 @@ function Suggestions() {
   // 🔹 Fetch last 1 month’s history
   const fetchHistory = async () => {
     try {
-      const response = await fetch(`${mainUri}/api/suggestion/history?student=${student._id}`);
+      const response = await fetch(
+        `${mainUri}/api/suggestion/history?student=${student.id}`,
+        {
+          headers: {
+            contentType: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.json();
       setHistory(data.suggestions || []);
     } catch (error) {
@@ -225,10 +243,12 @@ function Suggestions() {
     try {
       const response = await fetch(`${mainUri}/api/suggestion/register`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+         },
         body: JSON.stringify({
-          student: student._id,
-          hostel: student.hostel._id || student.hostel, // handle object or ID
+          student: student.id,
+          hostel: student.hostel,
           title,
           description: desc,
         }),
@@ -268,7 +288,8 @@ function Suggestions() {
 
         <p className="text-center text-lg font-medium mb-6 text-gray-700">
           You’ve submitted{" "}
-          <span className="font-bold text-[#4f46e5]">{count}</span> of 4 suggestions today.
+          <span className="font-bold text-[#4f46e5]">{count}</span> of 4
+          suggestions today.
         </p>
 
         {/* 🔹 Two components side-by-side */}
@@ -281,7 +302,10 @@ function Suggestions() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="suggestion" className="block text-sm font-medium text-[#4f46e5]">
+                <label
+                  htmlFor="suggestion"
+                  className="block text-sm font-medium text-[#4f46e5]"
+                >
                   Suggestion Details
                 </label>
                 <textarea

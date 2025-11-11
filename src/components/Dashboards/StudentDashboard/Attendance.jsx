@@ -135,13 +135,15 @@ function Attendance() {
 
   const getAttendance = async () => {
     const mainUri = import.meta.env.VITE_MAIN_URI;
-    let student = JSON.parse(localStorage.getItem("student"));
+    let student = JSON.parse(localStorage.getItem("Student"));
+    const token = localStorage.getItem("token");
     const res = await fetch(`${mainUri}/api/attendance/get`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ student: student._id }),
+      body: JSON.stringify({ student: student.id }),
     });
     const data = await res.json();
     if (data.success) {

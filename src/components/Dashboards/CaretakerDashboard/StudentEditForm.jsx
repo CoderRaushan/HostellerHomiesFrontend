@@ -718,7 +718,7 @@ function StudentEditForm() {
   const [address, setAddress] = useState("");
   const [dob, setDob] = useState("");
   const [uidai, setuidai] = useState("");
-    const [hostel, setHostel] = useState("");
+    const [hostelNo, setHostelNo] = useState("");
   // const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
@@ -777,7 +777,7 @@ function StudentEditForm() {
         address,
         dob,
         uidai,
-        hostel,
+        hostelNo,
       }
 
       const res = await fetch(`${mainUri}/api/student/update-student/${id}`, {
@@ -797,6 +797,7 @@ function StudentEditForm() {
         );
       }
     } catch (err) {
+      console.log(err);
       toast.error("An error occurred during update.");
     }
     setLoading(false);
@@ -864,11 +865,11 @@ function StudentEditForm() {
               value: dept, onChange: (e) => setDept(e.target.value),
             }} />
             <select
-              name="hostel"
-              id="hostel"
+              name="hostelNo"
+              id="hostelNo"
               className="bg-gray-200 p-1"
-              value={hostel}
-              onChange={(e) => setHostel(e.target.value)}
+              value={hostelNo}
+              onChange={(e) => setHostelNo(e.target.value)}
               required
             >
               <option value="">Select Hostel</option>

@@ -14,13 +14,16 @@ function Complaints() {
 
   // 🆕 New state for search text
   const [searchTerm, setSearchTerm] = useState("");
-
+  const manager = JSON.parse(localStorage.getItem("Manager"));
+  const token = localStorage.getItem("token");
   const getComplaints = async () => {
-    const hostels = JSON.parse(localStorage.getItem("admin"));
+    
     const response = await fetch(`${mainUri}/api/complaint/hostel`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ hostel: hostels.hostel }),
+      headers: { "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ HostelNo: manager.hostelNo || "1" }),
     });
 
     const data = await response.json();

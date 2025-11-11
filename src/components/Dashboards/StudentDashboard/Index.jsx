@@ -194,12 +194,12 @@ export default function Index() {
     },
   ];
 
-  const student = JSON.parse(localStorage.getItem("student"));
+  const student = JSON.parse(localStorage.getItem("Student"));
 
   return (
     <div className="flex">
       <Sidebar links={links} />
-      <Topbar name={student.name} notifications={[]} />
+      <Topbar name={student?.name} notifications={[]} />
       <div className="w-full bg-stone-900 h-screen">
         <Outlet />
       </div>
