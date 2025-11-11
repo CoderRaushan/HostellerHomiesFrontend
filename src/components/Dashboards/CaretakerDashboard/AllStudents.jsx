@@ -6,15 +6,16 @@ import { Link } from "react-router-dom";
 
 function AllStudents() {
   const mainUri = import.meta.env.VITE_MAIN_URI;
- const token = localStorage.getItem("token");
- const caretaker = JSON.parse(localStorage.getItem("Caretaker"));
+  const token = localStorage.getItem("token");
+  const caretaker = JSON.parse(localStorage.getItem("Caretaker"));
   const getCSV = async () => {
     const res = await fetch(`${mainUri}/api/student/csv`, {
       method: "POST",
-      headers: { "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ HostelNo: caretaker?.hostelNo || "1"}),
+      body: JSON.stringify({ HostelNo: caretaker?.hostelNo || "1" }),
     });
 
     const data = await res.json();
@@ -40,16 +41,20 @@ function AllStudents() {
   const deleteStudent = async (id) => {
     const res = await fetch(`${mainUri}/api/student/delete-student`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-       },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ id }),
     });
 
     const data = await res.json();
     if (data.success) {
       setAllStudents(allStudents.filter((student) => student._id !== id));
-      toast.success("Student Deleted Successfully!", { autoClose: 3000, theme: "dark" });
+      toast.success("Student Deleted Successfully!", {
+        autoClose: 3000,
+        theme: "dark",
+      });
     } else {
       toast.error(data.errors[0].msg, { autoClose: 3000 });
     }
@@ -61,7 +66,9 @@ function AllStudents() {
 
   return (
     <div className="w-full min-h-screen flex flex-col gap-5 items-center justify-start py-28 px-4 bg-[#f3e8ff] overflow-x-hidden">
-      <h1 className="font-bold text-4xl md:text-5xl text-black mb-5 text-center">All Students</h1>
+      <h1 className="font-bold text-4xl md:text-5xl text-black mb-5 text-center">
+        All Students
+      </h1>
 
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl flex justify-center mb-5">
         <button
@@ -73,7 +80,9 @@ function AllStudents() {
       </div>
 
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl bg-white px-6 py-5 rounded-2xl shadow-2xl overflow-y-auto max-h-[500px] border border-gray-300">
-        <span className="text-black font-bold text-xl md:text-2xl block mb-5 text-center">Student List</span>
+        <span className="text-black font-bold text-xl md:text-2xl block mb-5 text-center">
+          Student List
+        </span>
 
         <ul role="list" className="divide-y divide-gray-200">
           {allStudents?.length === 0 ? (
@@ -86,7 +95,7 @@ function AllStudents() {
               >
                 <div className="flex items-center space-x-4">
                   <div className="text-[#4f46e5]">
-                    <svg
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -99,30 +108,40 @@ function AllStudents() {
                         strokeLinejoin="round"
                         d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                       />
-                    </svg>
+                    </svg> */}
+                    <img
+                      src={student.profilePhoto}
+                      alt="Admin Profile"
+                      className="w-20 h-20 object-cover rounded-full border-2 border-indigo-500 shadow-md"
+                    />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-base md:text-lg font-semibold text-black truncate">{student.name}</p>
-                    <p className="text-sm text-gray-600 truncate">{student.urn} | Room: {student.room_no} | A/C: {student.accountNumber}</p>
+                    <p className="text-base md:text-lg font-semibold text-black truncate">
+                      {student.name}
+                    </p>
+                    <p className="text-sm text-gray-600 truncate">
+                      {student.urn} | Room: {student.room_no} | A/C:{" "}
+                      {student.accountNumber}
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <button className="hover:text-[#4f46e5] hover:scale-110 transition-all">
                     <Link to={`/caretaker-dashboard/student/${student._id}`}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z"
-                      />
-                    </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z"
+                        />
+                      </svg>
                     </Link>
                   </button>
                   <button
@@ -157,4 +176,3 @@ function AllStudents() {
 }
 
 export default AllStudents;
-
