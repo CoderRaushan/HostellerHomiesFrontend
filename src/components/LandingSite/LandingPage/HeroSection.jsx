@@ -255,20 +255,20 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
+import one from "/pictures/1h.jpg";
+import two from "/pictures/2h.jpg";
+import three from "/pictures/3h.jpg";
+import four from "/pictures/4h.jpg";
+import five from "/pictures/5h.jpg";
+import six from "/pictures/6h.jpg";
+import seven from "/pictures/7h.jpg";
+import eight from "/pictures/8h.jpg";
+import nine from "/pictures/9h.jpg";
+import eleven from "/pictures/11h.jpg";
+import twleve from "/pictures/12h.jpg";
 function HeroSection() {
   const slides = [
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/1h.jpg",
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/2h.jpg",
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/3h.jpg",
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/4h.jpg",
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/5h.jpg",
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/6h.jpg",
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/7h.jpg",
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/8h.jpg",
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/9h.jpg",
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/11h.jpg",
-    "https://raw.githubusercontent.com/CoderRaushan/HostellerHomies/refs/heads/main/client/public/pictures/12h.jpg"
+    one,two,three,four,five,six,seven,eight,nine,eleven,twleve
   ];
 
   return (

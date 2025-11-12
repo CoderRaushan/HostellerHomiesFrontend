@@ -62,7 +62,9 @@ import UpdateGuard from "./components/Dashboards/SecurityInchargeDashboard/Updat
 import StudentRooms from "./components/Dashboards/StudentDashboard/StudentRooms.jsx";
 import SARooms from "./components/Dashboards/SuperAdminDashboard/SARooms.jsx";
 import SAAllStudent from "./components/Dashboards/SuperAdminDashboard/SAAllStudent.jsx";
-import ChiefWardenEventVerification from "./components/Dashboards/SuperAdminDashboard/ChiefWardenEventVerification.jsx"
+import ChiefWardenEventVerification from "./components/Dashboards/SuperAdminDashboard/ChiefWardenEventVerification.jsx";
+import GuardRooms from "./components/Dashboards/Guard/GuardRooms.jsx";
+import GuardAttendance from "./components/Dashboards/Guard/GuardAttendance.jsx";
 function App() {
   return (
     <>
@@ -131,8 +133,8 @@ function App() {
         {/* Guard Dashboard */}
         <Route path="/guard-dashboard" element={<GuardIndex />}>
           <Route index element={<GuardHome />} />
-          <Route path="attendance" element={<AdminAttendance />} />
-          <Route path="rooms" element={<Room />} />
+          <Route path="attendance" element={<GuardAttendance />} />
+          <Route path="rooms" element={<GuardRooms />} />
         </Route>
 
         {/* Warden Dashboard */}
