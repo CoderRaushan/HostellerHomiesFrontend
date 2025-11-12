@@ -78,7 +78,7 @@ function Complaints() {
           },
         }
       );
-     
+
       setRegComplaints(res.data.complaints || []);
     } catch (err) {
       console.error("Error fetching complaints:", err);
@@ -94,40 +94,44 @@ function Complaints() {
     e.preventDefault();
     setLoading(true);
     try {
-  const res = await axios.post(
-    `${import.meta.env.VITE_MAIN_URI}/api/complaint/register`,
-    {
-      student: student.id,
-      hostel: student.hostel,
-      type,
-      title,
-      description: desc,
+      const res = await axios.post(
+        `${import.meta.env.VITE_MAIN_URI}/api/complaint/register`,
+        {
+          student: student?.id,
+          hostel: student?.hostel,
+          type,
+          title,
+          description: desc,
+        },{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // ✅ Fetch message directly from backend
+      setNotification({
+        message: res.data.msg || "Complaint Registered Successfully!",
+        type: res.data.success ? "success" : "error",
+      });
+
+      if (res.data.success) {
+        setTitle("");
+        setDesc("");
+        setType("Electric");
+        fetchComplaints();
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error(err);
+      setLoading(false);
+      setNotification({
+        message:
+          err.response?.data?.msg ||
+          "Something went wrong while registering complaint!",
+        type: "error",
+      });
     }
-  );
-
-  // ✅ Fetch message directly from backend
-  setNotification({
-    message: res.data.msg || "Complaint Registered Successfully!",
-    type: res.data.success ? "success" : "error",
-  });
-
-  if (res.data.success) {
-    setTitle("");
-    setDesc("");
-    setType("Electric");
-    fetchComplaints();
-    setLoading(false);
-  }
-} catch (err) {
-  console.error(err);
-
-  // ❌ Show backend error if available
-  setNotification({
-    message:
-      err.response?.data?.msg || "Something went wrong while registering complaint!",
-    type: "error",
-  });
-}
   };
 
   return (
@@ -236,50 +240,46 @@ function Complaints() {
                 No complaints found
               </p>
             ) : (
-              regComplaints.map(
-                (complain, index) => (
-                  (
-                    // <li key={index} className="py-3">
-                    //   <div className="flex items-center space-x-4">
-                    //     <div className="flex-shrink-0">
-                    //       {complain.status?.toLowerCase() === "solved" ? "Sloved" : "Pending"}
-                    //     </div>
-                    //     <div className="flex-1 min-w-0">
-                    //       <p className="text-sm font-medium truncate text-gray-800">{complain.title}</p>
-                    //       <p className="text-sm truncate text-gray-500">{complain.date || "No Date"}</p>
-                    //     </div>
-                    //   </div>
-                    // </li>
-                    <li key={index} className="py-3">
-                      <div className="flex items-center space-x-4">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium truncate text-gray-800">
-                            {complain.title}
-                          </p>
-                          <p className="text-sm truncate text-gray-500">
-                            {complain.date
-                              ? new Date(complain.date).toLocaleDateString()
-                              : "No Date"}
-                          </p>
-                        </div>
-                         <div className="flex-shrink-0">
-                          <span
-                            className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                              complain.status?.toLowerCase() === "solved"
-                                ? "bg-green-100 text-green-800"
-                                : "bg-yellow-100 text-yellow-800"
-                            }`}
-                          >
-                            {complain.status?.toLowerCase() === "solved"
-                              ? "Solved"
-                              : "Pending"}
-                          </span>
-                        </div>
-                      </div>
-                    </li>
-                  )
-                )
-              )
+              regComplaints.map((complain, index) => (
+                // <li key={index} className="py-3">
+                //   <div className="flex items-center space-x-4">
+                //     <div className="flex-shrink-0">
+                //       {complain.status?.toLowerCase() === "solved" ? "Sloved" : "Pending"}
+                //     </div>
+                //     <div className="flex-1 min-w-0">
+                //       <p className="text-sm font-medium truncate text-gray-800">{complain.title}</p>
+                //       <p className="text-sm truncate text-gray-500">{complain.date || "No Date"}</p>
+                //     </div>
+                //   </div>
+                // </li>
+                <li key={index} className="py-3">
+                  <div className="flex items-center space-x-4">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium truncate text-gray-800">
+                        {complain.title}
+                      </p>
+                      <p className="text-sm truncate text-gray-500">
+                        {complain.date
+                          ? new Date(complain.date).toLocaleDateString()
+                          : "No Date"}
+                      </p>
+                    </div>
+                    <div className="flex-shrink-0">
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                          complain.status?.toLowerCase() === "solved"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-yellow-100 text-yellow-800"
+                        }`}
+                      >
+                        {complain.status?.toLowerCase() === "solved"
+                          ? "Solved"
+                          : "Pending"}
+                      </span>
+                    </div>
+                  </div>
+                </li>
+              ))
             )}
           </ul>
         </div>
