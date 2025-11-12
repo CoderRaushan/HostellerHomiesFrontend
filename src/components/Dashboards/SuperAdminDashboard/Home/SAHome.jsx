@@ -1,148 +1,4 @@
 
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-
-// function SAHome() {
-//   const [hostelNo, setHostelNo] = useState("1");
-//   const [staffData, setStaffData] = useState({});
-//   const [loading, setLoading] = useState(false);
-
-//   const mainUri = import.meta.env.VITE_MAIN_URI;
-//   const token = localStorage.getItem("token");
-
-//   // Fetch staff data by hostel number
-//   const fetchStaff = async () => {
-//     if (!hostelNo) return;
-//     setLoading(true);
-//     try {
-//       const { data } = await axios.post(
-//         `${mainUri}/api/auth/get-all-staff-details`,
-//         { hostelNo },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-//       if (data.success) setStaffData(data.staff);
-//       else setStaffData({});
-//     } catch (err) {
-//       console.error("Error fetching staff:", err);
-//       setStaffData({});
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     if (hostelNo) fetchStaff();
-//   }, [hostelNo]);
-
-//   // Subcomponent for each role section
-//   const RoleSection = ({ title, people }) => {
-//     if (!people || people.length === 0) return null;
-//     return (
-//       <div className="mb-10 w-full ">
-//         <h2 className="text-2xl font-bold text-gray-800 mb-4 flex justify-center">{title}</h2>
-
-//         {/* ✅ Corrected layout */}
-//         <div className="flex flex-wrap justify-center gap-6">
-//           {people.map((p) => (
-//             <div
-//               key={p._id}
-//               className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 w-64 flex flex-col items-center hover:shadow-xl transition-transform hover:-translate-y-1"
-//             >
-//               <img
-//                 src={
-//                   p.profilePhoto ||
-//                   "https://cdn-icons-png.flaticon.com/512/149/149071.png"
-//                 }
-//                 alt={p.name}
-//                 className="w-20 h-20 rounded-full object-cover mb-3"
-//               />
-//               <h3 className="text-lg font-medium text-gray-900 text-center">
-//                 {p.name || "No Name"}
-//               </h3>
-//               <p className="text-sm text-gray-600 text-center mb-1">
-//                 Role: {p.role || "Unknown Role"}
-//               </p>
-//               <p className="text-sm text-gray-600 text-center mb-1">
-//                 Email: {p.email || "NA"}
-//               </p>
-//               <p className="text-sm text-gray-600 text-center mb-1">
-//                 Contact: {p.phone || "NA"}
-//               </p>
-//               <p className="text-sm text-gray-600 text-center mb-1">
-//                 Hostel No: {p.hostelNo || "NA"}
-//               </p>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     );
-//   };
-
-//   return (
-//     <div className="min-h-screen w-full bg-[#f3e8ff] px-4 sm:px-8 md:px-16 pt-24 pb-20 overflow-x-hidden overflow-y-auto lg:pl-64">
-//       <div className="max-w-screen-xl mx-auto flex flex-col items-center gap-6">
-//         {/* Page Title */}
-//         <h1 className="text-3xl font-bold text-gray-800 mt-4 text-center">
-//           🧑‍💼 Hostel Staff Directory
-//         </h1>
-
-//         {/* Hostel Selector */}
-//         <div className="flex justify-center mt-4">
-//           <select
-//             className="p-2 border rounded-md shadow-sm focus:ring-2 focus:ring-purple-400"
-//             onChange={(e) => setHostelNo(e.target.value)}
-//             value={hostelNo}
-//           >
-//             <option value="">Select Hostel</option>
-//             <option value="1">Hostel 1</option>
-//             <option value="2">Hostel 2</option>
-//             <option value="3">Hostel 3</option>
-//             <option value="4">Hostel 4</option>
-//             <option value="5">Hostel 5</option>
-//           </select>
-//         </div>
-
-//         {/* Loading / Empty States */}
-//         {loading && (
-//           <p className="text-center text-gray-600 text-lg pt-10">
-//             Loading staff details...
-//           </p>
-//         )}
-
-//         {!loading && !hostelNo && (
-//           <p className="text-center text-gray-500 text-lg pt-10">
-//             Please select a hostel to view staff details.
-//           </p>
-//         )}
-
-//         {/* Staff Details */}
-//         {!loading && hostelNo && (
-//           <div className="w-full mt-8">
-//             <RoleSection title="Warden" people={staffData.wardens} />
-//             <RoleSection title="Manager" people={staffData.managers} />
-//             <RoleSection title="Caretaker" people={staffData.caretakers} />
-//             <RoleSection
-//               title="Security Incharge"
-//               people={staffData.securityIncharges}
-//             />
-//             <RoleSection title="Guard" people={staffData.guards} />
-//             <RoleSection
-//               title="Privileged Students"
-//               people={staffData.privilegedStudents}
-//             />
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default SAHome;
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -158,6 +14,7 @@ function SAHome() {
 
   const mainUri = import.meta.env.VITE_MAIN_URI;
   const token = localStorage.getItem("token");
+  const saadmin = JSON.parse(localStorage.getItem("SuperAdmin"));
 
   // Fetch staff data by hostel number
   const fetchStaff = async () => {
@@ -357,6 +214,9 @@ function SAHome() {
     <div className="min-h-screen w-full bg-[#f3e8ff] px-4 sm:px-8 md:px-16 pt-24 pb-20 overflow-x-hidden overflow-y-auto lg:pl-64">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center gap-6">
         {/* Page Title */}
+        <h1 className="text-black font-bold text-4xl sm:text-5xl text-center">
+          Welcome <span className="text-[#4f46e5]">{saadmin?.name}</span>
+        </h1>
         <h1 className="text-3xl font-bold text-gray-800 mt-4 text-center">
           🧑‍💼 Hostel Staff Directory
         </h1>

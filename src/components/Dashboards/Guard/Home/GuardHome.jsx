@@ -42,9 +42,8 @@ function GuardHome() {
       <ToastContainer position="top-center" autoClose={2000} />
       <div className="max-w-screen-xl mx-auto flex flex-col items-center gap-6 mt-10">
         <h1 className="text-black font-bold text-4xl sm:text-5xl text-center">
-          Welcome <span className="text-[#4f46e5]">Guard Portal</span>
+          Welcome <span className="text-[#4f46e5]">{guard?.name} Hostel No.{guard?.hostelNo}</span>
         </h1>
-
         {loading ? (
           <p className="text-gray-700 text-lg mt-6">Loading guards...</p>
         ) : guards?.length === 0 ? (

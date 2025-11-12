@@ -106,7 +106,7 @@ function SIHome() {
   const [staff, setStaff] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedHostel, setSelectedHostel] = useState("ALL");
-
+  const securityinch=JSON.parse(localStorage.getItem("SecurityIncharge"));
   // ✅ Fetch staff details (with filter)
   const fetchStaff = async (hostelNo = "ALL") => {
     const token = localStorage.getItem("token");
@@ -160,6 +160,9 @@ function SIHome() {
   return (
     <div className="min-h-screen w-full bg-[#f3e8ff] px-4 sm:px-8 md:px-16 pt-24 pb-20 overflow-x-hidden overflow-y-auto lg:pl-64">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center gap-6">
+        <h1 className="text-black font-bold text-4xl sm:text-5xl text-center">
+          Welcome <span className="text-[#4f46e5]">{securityinch?.name}</span>
+        </h1>
         <h1 className="text-3xl font-bold text-gray-800 mt-4 text-center">
           All Staff Members
         </h1>

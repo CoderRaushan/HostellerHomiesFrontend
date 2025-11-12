@@ -1,5 +1,3 @@
-
-
 import { ShortCard } from "./ShortCard";
 import { List } from "./List";
 import { useEffect, useState } from "react";
@@ -20,7 +18,6 @@ function ManagerHome() {
   const mainUri = import.meta.env.VITE_MAIN_URI;
   const manager = JSON.parse(localStorage.getItem("Manager"));
 
-
   const [noOfStudents, setNoOfStudents] = useState(0);
   const [complaints, setComplaints] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
@@ -37,9 +34,10 @@ function ManagerHome() {
   const getComplaints = async () => {
     const response = await fetch(`${mainUri}/api/complaint/hostel`, {
       method: "POST",
-      headers: { "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-       },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ HostelNo: manager.hostelNo || "1" }),
     });
 
@@ -57,8 +55,9 @@ function ManagerHome() {
   const getSuggestions = async () => {
     const response = await fetch(`${mainUri}/api/suggestion/hostel`, {
       method: "POST",
-      headers: { "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ HostelNo: manager.hostelNo || "1" }),
     });
@@ -79,9 +78,10 @@ function ManagerHome() {
   const getRequests = async () => {
     const res = await fetch(`${mainUri}/api/messoff/list`, {
       method: "POST",
-      headers: { "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-       },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ HostelNo: manager.hostelNo || "1" }),
     });
 
@@ -167,62 +167,60 @@ function ManagerHome() {
 
   const data = transformApiData(complaints);
 
-const graph = (
-  <div className="bg-gradient-to-br from-white to-gray-50 p-5 rounded-2xl shadow-lg border border-gray-100 w-full sm:w-[48%] lg:w-[32%] h-[320px] flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1">
-    <div className="flex-1">
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart
-          data={data}
-          margin={{ top: 10, right: 20, bottom: 10, left: 0 }}
-        >
-          <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.9} />
-              <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.05} />
-            </linearGradient>
-          </defs>
-          <XAxis dataKey="name" tick={{ fill: "#6b7280", fontSize: 12 }} />
-          <YAxis tick={{ fill: "#6b7280", fontSize: 12 }} />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: "#ffffff",
-              border: "1px solid #e5e7eb",
-              borderRadius: "8px",
-            }}
-          />
-          <Legend verticalAlign="top" height={36} />
-          <Area
-            type="monotone"
-            dataKey="DailyComplaints"
-            stroke="#4f46e5"
-            strokeWidth={2}
-            fillOpacity={1}
-            fill="url(#colorUv)"
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+  const graph = (
+    <div className="bg-gradient-to-br from-white to-gray-50 p-5 rounded-2xl shadow-lg border border-gray-100 w-full sm:w-[48%] lg:w-[32%] h-[320px] flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1">
+      <div className="flex-1">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={data}
+            margin={{ top: 10, right: 20, bottom: 10, left: 0 }}
+          >
+            <defs>
+              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.9} />
+                <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.05} />
+              </linearGradient>
+            </defs>
+            <XAxis dataKey="name" tick={{ fill: "#6b7280", fontSize: 12 }} />
+            <YAxis tick={{ fill: "#6b7280", fontSize: 12 }} />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#ffffff",
+                border: "1px solid #e5e7eb",
+                borderRadius: "8px",
+              }}
+            />
+            <Legend verticalAlign="top" height={36} />
+            <Area
+              type="monotone"
+              dataKey="DailyComplaints"
+              stroke="#4f46e5"
+              strokeWidth={2}
+              fillOpacity={1}
+              fill="url(#colorUv)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+
+      <Link
+        to="/manager-dashboard/complaints"
+        className="py-3 text-lg text-center rounded-lg w-full text-black border-blue-600 border-2 hover:bg-blue-600 transition-all"
+      >
+        Manage Complaints
+      </Link>
     </div>
-
-    <Link
-      to="/manager-dashboard/complaints"
-      className="py-3 text-lg text-center rounded-lg w-full text-black border-blue-600 border-2 hover:bg-blue-600 transition-all"
-    >
-      Manage Complaints
-    </Link>
-  </div>
-);
-
+  );
 
   return (
     <div className="min-h-screen w-full bg-[#f3e8ff] px-4 sm:px-8 md:px-16 pt-10 pb-20 overflow-x-hidden overflow-y-auto lg:pl-64">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center gap-6 mt-10">
         <h1 className="text-black font-bold text-4xl sm:text-5xl text-center">
           Welcome{" "}
-          <span className="text-[#4f46e5]">{manager?.name || "manager"}!</span>
+          <span className="text-[#4f46e5]">
+            {manager?.name} Hostel No.{manager?.hostelNo}
+          </span>
         </h1>
-        <h2 className="text-black text-xl text-center">
-          Manager Hostel No , {manager?.hostelNo || "1"}
-        </h2>
 
         {/* Cards */}
         <div className="flex flex-wrap justify-center gap-4 w-full">

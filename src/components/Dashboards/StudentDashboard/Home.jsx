@@ -150,7 +150,7 @@ function Home() {
   return (
     <div className="w-full min-h-screen bg-white flex items-center justify-center flex-col gap-8 py-20 px-5 overflow-y-auto">
       <h1 className="text-gray-800 font-bold text-5xl text-center">
-        Welcome <span className="text-blue-600">{student.name}!</span>
+        Welcome <span className="text-blue-600">{student.name}, Hostel No {student.hostelNo}</span>
       </h1>
       <div className="flex gap-10 w-full justify-center flex-wrap">
         <List />

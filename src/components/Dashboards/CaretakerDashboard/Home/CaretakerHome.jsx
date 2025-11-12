@@ -442,7 +442,7 @@ function CaretakerHome() {
     <div className="min-h-screen bg-[#f3e8ff] px-4 sm:px-8 md:px-16 pt-10 pb-20 lg:pl-64">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center gap-6 mt-10">
         <h1 className="text-black font-bold text-4xl sm:text-5xl text-center">
-          Welcome <span className="text-[#4f46e5]">{caretaker?.name}</span>!
+          Welcome <span className="text-[#4f46e5]">{caretaker?.name} Hostel No {caretaker.hostelNo}</span>!
         </h1>
 
         <div className="flex flex-wrap justify-center gap-4 w-full mt-6">
