@@ -25,6 +25,8 @@ function Sidebar({ links }) {
 
   const logout = () => {
     localStorage.removeItem("SuperAdmin");
+    localStorage.removeItem("Warden");
+    localStorage.removeItem("SecurityIncharge");
     localStorage.removeItem("token");
     localStorage.removeItem("Manager");
     localStorage.removeItem("Caretaker");
