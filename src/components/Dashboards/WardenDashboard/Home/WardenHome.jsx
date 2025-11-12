@@ -12,7 +12,7 @@ function WardendHome() {
       <ToastContainer position="top-center" autoClose={2000} />
       <div className="max-w-screen-xl mx-auto flex flex-col items-center gap-6 mt-10">
         <h1 className="text-black font-bold text-4xl sm:text-5xl text-center">
-          Welcome <span className="text-[#4f46e5]">Guard Portal</span>
+          Welcome <span className="text-[#4f46e5]">{warden?.name} Hostel No.{warden?.hostelNo}</span>
         </h1>
           <div className=" flex justify-center sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full">
             {

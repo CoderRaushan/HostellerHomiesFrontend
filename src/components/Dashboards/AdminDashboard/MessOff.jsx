@@ -140,6 +140,7 @@ function MessOff() {
       });
       setProgress(50);
       const data = await res.json();
+      console.log(data)
       if (data.success) {
         data.list.forEach((req) => {
           req.id = req._id;
@@ -316,11 +317,13 @@ function MessOff() {
                 <div className="flex items-center space-x-4">
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-black">
-                      {req.student.name}
+                      <strong>{req.student.name}</strong>
                     </p>
                     <div className="flex items-center mt-1 flex-wrap gap-2 text-xs text-gray-500">
                       <span className="bg-gray-100 px-2 py-1 rounded text-gray-700">
-                        Room: {req.student.room_no}
+                        <strong>Ac: {req.student.accountNumber}</strong> {" | "}
+                        <strong>Room: {req.student.room_no}</strong> {" | "}
+                        <strong>URN: {req.student.urn}</strong>
                       </span>
                       <span className="font-medium">From:</span> {req.from}
                       <span className="font-medium">To:</span> {req.to}
