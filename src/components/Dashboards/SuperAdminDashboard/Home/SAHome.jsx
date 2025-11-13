@@ -261,6 +261,7 @@ function SAHome() {
               people={staffData.securityIncharges}
             />
             <RoleSection title="Guard" people={staffData.guards} />
+            <RoleSection title="Butler" people={staffData.butler} />
             <RoleSection
               title="Privileged Students"
               people={staffData.privilegedStudents}

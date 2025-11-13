@@ -65,6 +65,15 @@ import SAAllStudent from "./components/Dashboards/SuperAdminDashboard/SAAllStude
 import ChiefWardenEventVerification from "./components/Dashboards/SuperAdminDashboard/ChiefWardenEventVerification.jsx";
 import GuardRooms from "./components/Dashboards/Guard/GuardRooms.jsx";
 import GuardAttendance from "./components/Dashboards/Guard/GuardAttendance.jsx";
+import ButlerIndex from "./components/Dashboards/ButlerDashboard/ButlerIndex.jsx";
+import ButlerMessoff from "./components/Dashboards/ButlerDashboard/ButlerMessoff.jsx";
+import StudentBill from "./components/Dashboards/StudentDashboard/StudentBill.jsx";
+import StudentRequestFood from "./components/Dashboards/StudentDashboard/StudentRequestFood.jsx";
+import ButlerRequests from "./components/Dashboards/ButlerDashboard/ButlerRequests.jsx";
+import ButlerBillTable from "./components/Dashboards/ButlerDashboard/ButlerBillTable.jsx";
+import ButlerItemsManager from "./components/Dashboards/ButlerDashboard/ButlerManageItems.jsx";
+import StudentBillTable from "./components/Dashboards/StudentDashboard/StudentBillTable.jsx";
+import ManagerBillTable from "./components/Dashboards/ManagerDashboard/Home/ManagerBillTable.jsx";
 function App() {
   return (
     <>
@@ -93,6 +102,9 @@ function App() {
           <Route path="settings" element={<Settings />} />
           <Route path="event" element={<Event />} />
           <Route path="rooms" element={<StudentRooms />} />
+          <Route path="bill" element={<StudentBill/>}/>
+          <Route path="food-request" element={<StudentRequestFood/>}/>
+          <Route path="bill-table" element={<StudentBillTable />} />
           <Route
             path="security-guard-detail"
             element={<SecurityGuardDetails />}
@@ -113,9 +125,10 @@ function App() {
         <Route path="/manager-dashboard" element={<ManagerIndex />}>
           <Route index element={<ManagerHome />} />
           <Route path="create-staff" element={<CreateStaff />} />
-          <Route path="mess" element={<AdminMess />} />
+          {/* <Route path="mess" element={<AdminMess />} /> */}
           <Route path="complaints" element={<AdminComplaints />} />
           <Route path="suggestions" element={<AdminSuggestions />} />
+          <Route path="bill-table" element={<ManagerBillTable />} />
         </Route>
 
         {/* caretaker-dashboard */}
@@ -137,6 +150,14 @@ function App() {
           <Route path="rooms" element={<GuardRooms />} />
         </Route>
 
+        {/* Butler Dashboard */}
+        <Route path="/butler-dashboard" element={<ButlerIndex />}>
+          <Route path="mess" element={<ButlerMessoff />} />
+          <Route path="food-request" element={<ButlerRequests />} />
+          <Route path="bill-table" element={<ButlerBillTable />} />
+          <Route path="manage-items" element={<ButlerItemsManager/>} />
+        </Route>
+
         {/* Warden Dashboard */}
         <Route path="/warden-dashboard" element={<WardenIndex />}>
           <Route index element={<WardendHome />} />
@@ -145,7 +166,7 @@ function App() {
             element={<EventRequestVerification />}
           />
           <Route path="rooms" element={<Room />} />
-
+          
         </Route>
 
         {/* SecurityIncharge dashboard */}
@@ -156,12 +177,12 @@ function App() {
           <Route path="manage-guard" element={<SecurityGuardSelector />} />
         </Route>
 
-        <Route path="/admin-dashboard" element={<AdminIndex />}>
+        {/* <Route path="/admin-dashboard" element={<AdminIndex />}>
           <Route index element={<AdminHome />} />
           <Route path="register-student" element={<RegisterStudent />} />
           <Route path="attendance" element={<AdminAttendance />} />
           <Route path="complaints" element={<AdminComplaints />} />
-          {/* <Route path="invoices" element={<AdminInvoices/>} /> */}
+          <Route path="invoices" element={<AdminInvoices/>} />
           <Route path="suggestions" element={<AdminSuggestions />} />
           <Route path="settings" element={<AdminSettings />} />
           <Route path="all-students" element={<AllStudents />} />
@@ -176,7 +197,7 @@ function App() {
           />
           <Route path="rooms" element={<Room />} />
           <Route path="student/:id" element={<StudentEditForm />} />
-        </Route>
+        </Route> */}
       </Routes>
     </>
   );

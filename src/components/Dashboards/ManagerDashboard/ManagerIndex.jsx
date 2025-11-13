@@ -28,8 +28,8 @@ export default function ManagerIndex() {
       ),
     },
     {
-      text: "Mess Off",
-      url: "/manager-dashboard/mess",
+      text: "Bill  Table",
+      url: "/manager-dashboard/bill-table",
       svg: (
         <svg
           className="h-7 w-7"

@@ -275,6 +275,9 @@ export default function SignIn() {
              else if (result.data.Detail.role === "SecurityIncharge") {
               navigate("/securityincharge-dashboard");
             }
+            else if (result.data.Detail.role === "Butler") {
+              navigate("/butler-dashboard");
+            }
             else {
               navigate("/student-dashboard");
             }
@@ -378,6 +381,7 @@ export default function SignIn() {
                     <option value="SecurityIncharge">Security Incharge</option>
                     <option value="Guard">Guard</option>
                     <option value="Student">Student</option>
+                    <option value="Butler">Butler</option>
                     <option value="PrivilegeStudent">Privileged Student</option>
                   </select>
                 </div>

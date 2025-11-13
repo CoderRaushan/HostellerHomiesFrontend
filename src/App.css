@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+
+
+/* :root {
   --clr-primary: #111827;
   --primary: #1C1917;
   --secondary: #0A0A0A;
@@ -12,13 +14,12 @@ body {
   background-color: var(--clr-primary);
 }
 
-/* Firefox */
+
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--secondary) var(--primary);
 }
 
-/* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 5px;
 }
@@ -29,8 +30,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  /* background-color: var(--primary); */
-  /* border-radius: 14px; */
+
   border-left: 5px solid var(--primary);
 }
 
@@ -48,4 +48,4 @@ input:-webkit-autofill:active {
     -webkit-appearance: none;
     margin: 0;
   }
-}
+} */

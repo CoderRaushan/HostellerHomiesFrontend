@@ -23,6 +23,7 @@
     "chart.js": "^4.3.0",
     "emailjs": "^4.0.2",
     "framer-motion": "^12.9.2",
+    "html2canvas": "^1.4.1",
     "jspdf": "^3.0.3",
     "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.487.0",

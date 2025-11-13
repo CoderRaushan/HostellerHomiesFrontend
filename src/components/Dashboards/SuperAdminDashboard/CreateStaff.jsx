@@ -195,7 +195,6 @@ const CreateStaff = () => {
             hostelNo: formState.hostelNo,
         }),
       });
-       console.log("entering2..")
 
       const result = await res.json();
       console.log("result", result);
@@ -297,6 +296,7 @@ const CreateStaff = () => {
             <option value="Caretaker">Caretaker</option>
             <option value="Manager">Manager</option>
             <option value="SecurityIncharge">Security Incharge</option>
+            <option value="Butler">Butler</option>
             <option value="PrivilegedStudent">Privileged Student</option>
           </select>
 
